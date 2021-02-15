@@ -1,0 +1,4 @@
+name: SloverSurvivalReborn
+version: ${project.version}
+main: me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn
+api-version: 1.16
