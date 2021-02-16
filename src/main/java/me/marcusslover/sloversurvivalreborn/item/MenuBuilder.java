@@ -1,6 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.item;
 
-import me.marcusslover.sloversurvivalreborn.utils.IBuilder;
+import me.marcusslover.sloversurvivalreborn.code.IBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

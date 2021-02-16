@@ -1,4 +1,4 @@
-package me.marcusslover.sloversurvivalreborn.utils;
+package me.marcusslover.sloversurvivalreborn.code;
 
 import java.util.List;
 

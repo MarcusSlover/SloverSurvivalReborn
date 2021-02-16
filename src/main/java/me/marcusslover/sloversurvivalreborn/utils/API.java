@@ -1,5 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.utils;
 
+import com.google.gson.JsonParser;
 import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,7 @@ public class API {
         return SloverSurvivalReborn.log();
     }
 
+    public static final JsonParser JSON_PARSER = new JsonParser();
     public static final String SUCCESS = "%rgb(100,176,28)➤ %rgb(129,216,46)Success&8: &7";
     public static final String INFO = "%rgb(4,165,186)➤ %rgb(54,183,199)Info&8: &7";
     public static final String ERROR = "%rgb(176,31,31)➤ %rgb(251,48,48)Error&8: &7";

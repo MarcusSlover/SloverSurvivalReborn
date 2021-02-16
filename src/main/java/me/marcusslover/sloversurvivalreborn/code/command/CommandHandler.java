@@ -4,9 +4,10 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.Init;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
-import me.marcusslover.sloversurvivalreborn.utils.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.utils.IHandler;
+import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
+import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
@@ -14,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandHandler implements ICodeInitializer, IHandler<SloverCommand> {

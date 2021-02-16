@@ -3,8 +3,6 @@ package me.marcusslover.sloversurvivalreborn.code;
 import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.event.IMenu;
 import me.marcusslover.sloversurvivalreborn.code.event.Menu;
-import me.marcusslover.sloversurvivalreborn.utils.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.utils.IHandler;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Server;
 import org.bukkit.entity.HumanEntity;
@@ -17,6 +15,7 @@ import org.bukkit.plugin.PluginManager;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CodeInitializer implements IHandler<ICodeInitializer> {
@@ -37,29 +36,30 @@ public class CodeInitializer implements IHandler<ICodeInitializer> {
         PluginManager pluginManager = server.getPluginManager();
 
         Class<? extends ICodeInitializer> aClass = object.getClass();
-        Field[] declaredFields = aClass.getDeclaredFields();
+        Field[] fields = aClass.getDeclaredFields();
 
-        for (Field declaredField : declaredFields) {
-            Annotation[] annotations = declaredField.getAnnotations();
+        for (Field field : fields) {
+            Annotation[] annotations = field.getDeclaredAnnotations();
 
             for (Annotation annotation : annotations) {
+
                 if (annotation instanceof Init) {
                     boolean accessibilityChange = false;
 
-                    if (!declaredField.isAccessible()) {
-                        declaredField.setAccessible(true);
+                    if (!field.isAccessible()) {
+                        field.setAccessible(true);
                         accessibilityChange = true;
                     }
-                    Class<?> type = declaredField.getType();
+                    Class<?> type = field.getType();
                     if (type.isAssignableFrom(List.class)) {
                         try {
-                            declaredField.set(object, new ArrayList<>());
+                            field.set(object, new ArrayList<>());
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
                         }
                     }
                     if (accessibilityChange) {
-                        declaredField.setAccessible(false);
+                        field.setAccessible(false);
                     }
                 }
 

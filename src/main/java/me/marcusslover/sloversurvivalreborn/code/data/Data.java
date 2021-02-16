@@ -1,12 +1,13 @@
-package me.marcusslover.sloversurvivalreborn.code;
+package me.marcusslover.sloversurvivalreborn.code.data;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Init {
+@Target(ElementType.TYPE)
+public @interface Data {
+    String path();
+    String type();
 }

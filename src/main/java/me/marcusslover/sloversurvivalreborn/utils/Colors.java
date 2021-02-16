@@ -41,14 +41,16 @@ public class Colors {
             return color;
         }
     }
+
     public static String toColor(String s) {
         String uni = unicodeConvert(s);
         String hex = colorHex(uni);
         String rgb = colorRgb(hex);
         String hsb = colorHsb(rgb);
         String cint = colorInt(hsb);
+        String grad = colorGrad(cint);
 
-        return ChatColor.translateAlternateColorCodes('&', cint);
+        return ChatColor.translateAlternateColorCodes('&', grad);
     }
 
     private static String colorHex(final String string) {
@@ -178,6 +180,49 @@ public class Colors {
             }
         }
         return copy;
+    }
+
+    private static String colorGrad(final String string) {
+        final String[] spelling = {"gradient", "GRAD", "grad", "GRADIENT"};
+        String copy = string;
+
+        for (final String s1 : spelling) {
+            if (!string.contains(s1)) {
+                continue;
+            }
+            Pattern pattern = Pattern.compile("%" + s1 + "(\\()(#[a-fA-F0-9]{6}), (#[a-fA-F0-9]{6}), ([.]*)(\\))");
+            Matcher matcher = pattern.matcher(copy); // match to the string
+
+            while (matcher.find()) {
+                try {
+                    ChatColor pos1 = ChatColor.of(matcher.group(2));
+                    ChatColor pos2 = ChatColor.of(matcher.group(3));
+                    String gradientText = matcher.group(4);
+                    String colorGradient = colorGradient(gradientText, pos1.getColor(), pos2.getColor(), new LinearInterpolator());
+                    copy = copy.replaceFirst(pattern.pattern(), colorGradient);
+                } catch (Exception ignored) {
+                    return string;
+                }
+            }
+        }
+        return copy;
+    }
+
+    private static String colorGradient(final String string, Color from, Color to, IInterpolator IInterpolator) {
+        double[] red = IInterpolator.interpolate(from.getRed(), to.getRed(), string.length());
+        double[] green = IInterpolator.interpolate(from.getGreen(), to.getGreen(), string.length());
+        double[] blue = IInterpolator.interpolate(from.getBlue(), to.getBlue(), string.length());
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < string.length(); i++) {
+            builder.append(ChatColor.of(new Color(
+                    (int) Math.round(red[i]),
+                    (int) Math.round(green[i]),
+                    (int) Math.round(blue[i]))))
+                    .append(string.charAt(i));
+        }
+
+        return builder.toString();
     }
 
     public static java.util.List<String> toColor(java.util.List<String> s) {

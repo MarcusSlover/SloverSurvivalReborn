@@ -1,4 +1,6 @@
-package me.marcusslover.sloversurvivalreborn.utils;
+package me.marcusslover.sloversurvivalreborn.code;
+
+import me.marcusslover.sloversurvivalreborn.utils.API;
 
 public interface ICodeInitializer {
     default void initialize() {}
