@@ -1,6 +1,5 @@
 package me.marcusslover.sloversurvivalreborn.bank;
 
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;

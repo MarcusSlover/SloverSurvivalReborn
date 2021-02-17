@@ -19,9 +19,11 @@ public class JointBankAccount extends BankAccount<JointBankAccount> {
     public void addParty(UUID uuid) {
         parties.add(uuid);
     }
+
     public void removeParty(UUID uuid) {
         parties.remove(uuid);
     }
+
     public List<UUID> getParties() {
         return parties;
     }

@@ -6,7 +6,7 @@ import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Items {
+public class ItemUtil {
 
     public static boolean isNamed(ItemStack item, String name) {
         if (!isValid(item)) return false;
@@ -17,7 +17,7 @@ public class Items {
             return false;
         }
         String itemName = itemMeta.getDisplayName();
-        return itemName.equalsIgnoreCase(Colors.toColor(name));
+        return itemName.equalsIgnoreCase(ColorUtil.toColor(name));
     }
 
     public static boolean hasTag(ItemStack item, String key) {

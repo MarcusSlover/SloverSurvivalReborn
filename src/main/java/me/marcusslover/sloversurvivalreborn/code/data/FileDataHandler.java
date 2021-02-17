@@ -4,8 +4,8 @@ import me.marcusslover.sloversurvivalreborn.bank.BankAccountData;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
-import me.marcusslover.sloversurvivalreborn.code.data.user.UserFileData;
-import me.marcusslover.sloversurvivalreborn.code.data.warp.WarpFileData;
+import me.marcusslover.sloversurvivalreborn.user.UserFileData;
+import me.marcusslover.sloversurvivalreborn.warp.WarpFileData;
 
 import java.util.List;
 

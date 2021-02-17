@@ -2,11 +2,11 @@ package me.marcusslover.sloversurvivalreborn.listener;
 
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.code.data.user.UserFileData;
-import me.marcusslover.sloversurvivalreborn.code.data.user.User;
 import me.marcusslover.sloversurvivalreborn.code.task.ITask;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
+import me.marcusslover.sloversurvivalreborn.user.User;
+import me.marcusslover.sloversurvivalreborn.user.UserFileData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

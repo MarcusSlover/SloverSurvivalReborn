@@ -1,10 +1,9 @@
-package me.marcusslover.sloversurvivalreborn.code.data;
+package me.marcusslover.sloversurvivalreborn.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import me.marcusslover.sloversurvivalreborn.utils.API;
 
 import java.io.*;
 
