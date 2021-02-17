@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import me.marcusslover.sloversurvivalreborn.code.data.Data;
+import me.marcusslover.sloversurvivalreborn.code.data.DataUtil;
 import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 
@@ -27,18 +28,8 @@ public class WarpFileData implements IFileData<JsonObject> {
     public void read(String key) {
         File file = this.getFile(key);
         try {
-            FileReader fileReader = new FileReader(file);
-            JsonElement jsonElement = null;
-            try {
-                jsonElement = API.JSON_PARSER.parse(fileReader);
-            } catch (JsonSyntaxException jsonSyntaxException) {
-                jsonSyntaxException.printStackTrace();
-            }
-            if (jsonElement == null) {
-                jsonElement = new JsonObject();
-            }
-            JsonObject asJsonObject = jsonElement.getAsJsonObject();
-            this.map.put(key, new Warp(asJsonObject));
+            JsonObject obj = DataUtil.readJsonElement(file).getAsJsonObject();
+            this.map.put(key, new Warp(obj));
         } catch (Exception e) {
             e.printStackTrace();
         }
