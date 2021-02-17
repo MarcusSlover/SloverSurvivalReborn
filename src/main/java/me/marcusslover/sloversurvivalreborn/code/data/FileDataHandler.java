@@ -17,7 +17,7 @@ public class FileDataHandler implements ICodeInitializer, IHandler<IFileData<?>>
     public void initialize() {
         add(new UserFileData());
         add(new WarpFileData());
-        add(new BankAccountData());
+        add(BankAccountData.instance);
     }
 
     @Override

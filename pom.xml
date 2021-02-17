@@ -87,5 +87,11 @@
             <version>1.16.5-R0.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>ch.obermuhlner</groupId>
+            <artifactId>big-math</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
 </project>

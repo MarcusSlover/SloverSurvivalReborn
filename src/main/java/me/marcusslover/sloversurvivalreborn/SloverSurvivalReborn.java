@@ -1,5 +1,6 @@
 package me.marcusslover.sloversurvivalreborn;
 
+import me.marcusslover.sloversurvivalreborn.bank.Bank;
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.command.CommandHandler;
 import me.marcusslover.sloversurvivalreborn.code.data.FileDataHandler;
@@ -34,6 +35,7 @@ public final class SloverSurvivalReborn extends JavaPlugin {
         codeInitializer.add(new FileDataHandler());
         codeInitializer.add(new ServerListener());
         codeInitializer.add(new ChatListener());
+        codeInitializer.add(new Bank());
 
         log().info("Initialization done.");
     }

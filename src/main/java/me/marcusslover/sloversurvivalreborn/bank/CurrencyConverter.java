@@ -18,12 +18,8 @@ public class CurrencyConverter {
     }
 
     public static void update() {
-        BigDecimal totalBalance = new BigDecimal("0");
-        for (BankAccount<?> account : Bank.accounts.values()) {
-            totalBalance = totalBalance.add(account.getBalance());
-        }
-        totalBalance = totalBalance.divide(BigDecimal.valueOf(Bank.accounts.size()), Bank.MAX_PRECISION, RoundingMode.HALF_EVEN);
-        conversionRate = totalBalance.divide(BigDecimal.valueOf(Bank.getDiamondCount()), Bank.MAX_PRECISION, RoundingMode.HALF_EVEN).doubleValue();
+        BigDecimal avgBalance = Bank.getAverageBalance();
+        conversionRate = avgBalance.divide(BigDecimal.valueOf(Bank.getDiamondCount()), Bank.MAX_PRECISION, RoundingMode.HALF_EVEN).doubleValue();
     }
 
     /**

@@ -23,6 +23,11 @@ public class DataUtil {
     }
 
     public static void writeJsonElement(JsonObject obj, File file) throws IOException {
+        if (!file.getParentFile().exists()) {
+            if (!file.getParentFile().mkdirs()) {
+                throw new IOException("Couldn't create parent directory!");
+            }
+        }
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write(new Gson().toJson(obj));
         writer.close();

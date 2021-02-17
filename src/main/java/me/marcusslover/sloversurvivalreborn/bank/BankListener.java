@@ -6,9 +6,11 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public class BankListener implements Listener {
     @EventHandler
@@ -42,5 +44,11 @@ public class BankListener implements Listener {
         }
 
         Bank.setDiamondCount(Bank.getDiamondCount() + diamonds);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        UUID id = event.getPlayer().getUniqueId();
+        Bank.unload(id);
     }
 }

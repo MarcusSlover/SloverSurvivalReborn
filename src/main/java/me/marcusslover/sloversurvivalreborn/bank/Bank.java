@@ -1,24 +1,31 @@
 package me.marcusslover.sloversurvivalreborn.bank;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
+import com.google.common.math.BigIntegerMath;
 import com.google.gson.JsonObject;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.Init;
 import me.marcusslover.sloversurvivalreborn.code.data.FileDataHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class Bank implements ICodeInitializer {
     public static final int MAX_PRECISION = 16;
-
     private static volatile long diamondCount;
     static SystemBankAccount account = new SystemBankAccount();
-    private static FileDataHandler fdh = new FileDataHandler();
-    private static BankAccountData data = new BankAccountData();
 
     static Map<UUID, BankAccount<?>> accounts = new HashMap<>();
+
+    static {
+        accounts.put(account.getAccountId(), account);
+    }
 
     public static long getDiamondCount() {
         return diamondCount;
@@ -36,33 +43,52 @@ public class Bank implements ICodeInitializer {
         if (accountExists(player.getUniqueId()))
             return null;
         PlayerBankAccount account = new PlayerBankAccount(player.getUniqueId());
-        data.setAccount(player.getUniqueId().toString(), account);
+        BankAccountData.instance.setAccount(player.getUniqueId().toString(), account);
         return account;
     }
 
     public static BankAccount<?> loadBankAccount(UUID uuid) {
         if (!accounts.containsKey(uuid)) {
-            data.read(uuid.toString());
+            BankAccountData.instance.read(uuid.toString());
         }
         return accounts.get(uuid);
     }
 
     public static boolean accountExists(UUID uuid) {
-        return data.exists(uuid.toString());
+        return BankAccountData.instance.exists(uuid.toString());
+    }
+
+    public static void unload(UUID id) {
+        accounts.remove(id);
+    }
+
+    public static boolean isOffline(BankAccount<?> account) {
+        if (account instanceof PlayerBankAccount) {
+            PlayerBankAccount pa = (PlayerBankAccount) account;
+            if (pa.getPlayer() == null)
+                return true;
+        }
+        if (account instanceof JointBankAccount) {
+            JointBankAccount ja = (JointBankAccount) account;
+            if (ja.getParties().stream().allMatch(id -> Bukkit.getPlayer(id) == null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void initialize() {
-        JsonObject bankData = data.readBank();
+        JsonObject bankData = BankAccountData.instance.readBank();
         CurrencyConverter.conversionRate = bankData.get("rate").getAsDouble();
-        diamondCount = bankData.getAsLong();
+        diamondCount = bankData.get("diamondCount").getAsLong();
     }
 
     public static void save() {
         for (UUID uuid : accounts.keySet()) {
-            data.save(uuid.toString());
+            BankAccountData.instance.save(uuid.toString());
         }
-        data.saveBank();
+        BankAccountData.instance.saveBank();
     }
 
 
@@ -88,5 +114,34 @@ public class Bank implements ICodeInitializer {
             obj.addProperty("balance", this.balance);
             return obj;
         }
+    }
+
+    public static BigDecimal getAverageBalance() {
+        BigDecimal totalBalance = new BigDecimal("0");
+        for (BankAccount<?> account : Bank.accounts.values()) {
+            totalBalance = totalBalance.add(account.getBalance());
+        }
+        return totalBalance.divide(BigDecimal.valueOf(Bank.accounts.size()), Bank.MAX_PRECISION, RoundingMode.HALF_EVEN);
+    }
+
+    private static final BigDecimal BEGIN_TAX = new BigDecimal(".25");
+    private static final BigDecimal BEGIN_GREAT_TAX = new BigDecimal("1.75");
+    private static MathContext mctx = new MathContext(MAX_PRECISION + 1);
+
+    public static double getTaxRate(BigDecimal balance) {
+        BigDecimal avgBalance = getAverageBalance();
+
+        BigDecimal taxBegin = avgBalance.multiply(BEGIN_TAX);
+        if (balance.compareTo(taxBegin) > 0) {
+            BigDecimal greatTaxBegin = avgBalance.multiply(BEGIN_GREAT_TAX);
+            if (balance.compareTo(greatTaxBegin) > 0) {
+                BigDecimal ratio = balance.divide(greatTaxBegin);
+                return Math.max(getTaxRate(avgBalance), Math.min(.325, BigDecimalMath.log10(ratio, mctx).divide(BigDecimal.valueOf(2), mctx).doubleValue()));
+            }
+            BigDecimal ratio = balance.divide(taxBegin, mctx);
+            return Math.max(.05, BigDecimalMath.log10(ratio.add(BigDecimal.valueOf(1), mctx), mctx).divide(BigDecimal.valueOf(1.75), mctx).doubleValue());
+        }
+
+        return 0;
     }
 }
