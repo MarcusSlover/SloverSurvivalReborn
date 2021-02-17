@@ -1,7 +1,8 @@
-package me.marcusslover.sloversurvivalreborn.code.data;
+package me.marcusslover.sloversurvivalreborn.code.data.user;
 
 import com.google.gson.JsonObject;
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
+import me.marcusslover.sloversurvivalreborn.utils.JsonWrapper;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
 

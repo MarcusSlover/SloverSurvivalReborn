@@ -3,6 +3,8 @@ package me.marcusslover.sloversurvivalreborn.code.data;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
+import me.marcusslover.sloversurvivalreborn.code.data.user.UserFileData;
+import me.marcusslover.sloversurvivalreborn.code.data.warp.WarpFileData;
 
 import java.util.List;
 
@@ -12,7 +14,8 @@ public class FileDataHandler implements ICodeInitializer, IHandler<IFileData<?>>
 
     @Override
     public void initialize() {
-        add(new PlayerFileData());
+        add(new UserFileData());
+        add(new WarpFileData());
     }
 
     @Override

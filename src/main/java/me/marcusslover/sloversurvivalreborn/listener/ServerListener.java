@@ -2,8 +2,8 @@ package me.marcusslover.sloversurvivalreborn.listener;
 
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.code.data.PlayerFileData;
-import me.marcusslover.sloversurvivalreborn.code.data.User;
+import me.marcusslover.sloversurvivalreborn.code.data.user.UserFileData;
+import me.marcusslover.sloversurvivalreborn.code.data.user.User;
 import me.marcusslover.sloversurvivalreborn.code.task.ITask;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
@@ -27,7 +27,7 @@ public class ServerListener implements ICodeInitializer, Listener {
         if (loginEvent.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED) {
             return;
         }
-        PlayerFileData instance = PlayerFileData.getInstance();
+        UserFileData instance = UserFileData.getInstance();
         String key = uniqueId.toString();
         instance.read(key);
     }
@@ -42,7 +42,7 @@ public class ServerListener implements ICodeInitializer, Listener {
         if (rankHandler != null) {
             Scoreboard mainScoreboard = rankHandler.getMainScoreboard();
 
-            PlayerFileData instance = PlayerFileData.getInstance();
+            UserFileData instance = UserFileData.getInstance();
             Map<String, User> map = instance.getMap();
 
             User user = map.get(key);
@@ -67,7 +67,7 @@ public class ServerListener implements ICodeInitializer, Listener {
         Player player = event.getPlayer();
         UUID uniqueId = player.getUniqueId();
 
-        PlayerFileData instance = PlayerFileData.getInstance();
+        UserFileData instance = UserFileData.getInstance();
         String key = uniqueId.toString();
 
         ITask.applyAsync(() -> {
