@@ -4,6 +4,7 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
+import me.marcusslover.sloversurvivalreborn.command.BankCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 import org.apache.commons.lang.Validate;
@@ -22,11 +23,8 @@ public class CommandHandler implements ICodeInitializer, IHandler<SloverCommand>
 
     @Override
     public void initialize() {
-        try {
-            add(new SpawnCommand());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        add(new SpawnCommand());
+        add(new BankCommand());
     }
 
     @Override
