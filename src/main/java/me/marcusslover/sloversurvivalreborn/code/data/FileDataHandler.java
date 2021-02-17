@@ -1,5 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.code.data;
 
+import me.marcusslover.sloversurvivalreborn.bank.BankAccountData;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
@@ -16,6 +17,7 @@ public class FileDataHandler implements ICodeInitializer, IHandler<IFileData<?>>
     public void initialize() {
         add(new UserFileData());
         add(new WarpFileData());
+        add(new BankAccountData());
     }
 
     @Override

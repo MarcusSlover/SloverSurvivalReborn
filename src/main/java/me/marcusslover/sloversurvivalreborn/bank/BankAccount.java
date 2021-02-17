@@ -8,6 +8,10 @@ import java.util.UUID;
 public abstract class BankAccount<TThis extends BankAccount<TThis>> {
     protected BigDecimal balance;
 
+    public BankAccount(UUID id) {
+        balance = new BigDecimal("256");
+    }
+
     public BigDecimal getBalance() {
         return balance;
     }

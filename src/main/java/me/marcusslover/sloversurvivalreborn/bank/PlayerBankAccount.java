@@ -9,6 +9,11 @@ import java.util.UUID;
 public class PlayerBankAccount extends BankAccount<PlayerBankAccount> {
     private UUID uuid;
 
+    public PlayerBankAccount(UUID id) {
+        super(id);
+        this.uuid = id;
+    }
+
     @Override
     public UUID getAccountId() {
         return uuid;
@@ -21,14 +26,13 @@ public class PlayerBankAccount extends BankAccount<PlayerBankAccount> {
     @Override
     public void load(JsonObject object) {
         this.balance = object.get("balance").getAsBigDecimal();
-        this.uuid = UUID.fromString(object.get("player").getAsString());
+        this.uuid = UUID.fromString(object.get("id").getAsString());
     }
 
     @Override
     public JsonObject toJson() {
         JsonObject obj = new JsonObject();
         obj.addProperty("balance", this.balance);
-        obj.addProperty("player", this.getAccountId().toString());
         return obj;
     }
 }

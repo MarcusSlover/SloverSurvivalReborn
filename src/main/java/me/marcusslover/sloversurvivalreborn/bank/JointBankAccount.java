@@ -11,6 +11,11 @@ public class JointBankAccount extends BankAccount<JointBankAccount> {
     private UUID accountId;
     private List<UUID> parties;
 
+    public JointBankAccount(UUID id) {
+        super(id);
+        this.accountId = id;
+    }
+
     public void addParty(UUID uuid) {
         parties.add(uuid);
     }
