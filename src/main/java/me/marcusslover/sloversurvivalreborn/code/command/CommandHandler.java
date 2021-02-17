@@ -17,9 +17,9 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
-public class CommandHandler implements ICodeInitializer, IHandler<SloverCommand> {
+public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
     @Init
-    private List<SloverCommand> sloverCommandList;
+    private List<ICommand> iCommandList;
 
     @Override
     public void initialize() {
@@ -28,10 +28,10 @@ public class CommandHandler implements ICodeInitializer, IHandler<SloverCommand>
     }
 
     @Override
-    public void add(SloverCommand object) {
+    public void add(ICommand object) {
         Validate.notNull(object);
 
-        Class<? extends SloverCommand> aClass = object.getClass();
+        Class<? extends ICommand> aClass = object.getClass();
         Annotation[] annotations = aClass.getAnnotations();
         boolean isCommand = false;
 
@@ -41,8 +41,8 @@ public class CommandHandler implements ICodeInitializer, IHandler<SloverCommand>
                 String name = command.name();
 
                 // Additional check
-                for (SloverCommand sloverCommand : sloverCommandList) {
-                    Class<? extends SloverCommand> aClass1 = sloverCommand.getClass();
+                for (ICommand iCommand : iCommandList) {
+                    Class<? extends ICommand> aClass1 = iCommand.getClass();
                     Annotation[] annotations1 = aClass1.getAnnotations();
 
                     for (Annotation annotation1 : annotations1) {
@@ -84,11 +84,11 @@ public class CommandHandler implements ICodeInitializer, IHandler<SloverCommand>
             API.getLogger().warning("Could not read the Command annotation!");
             return;
         }
-        sloverCommandList.add(object);
+        iCommandList.add(object);
     }
 
     @Override
-    public List<SloverCommand> getRegistered() {
-        return sloverCommandList;
+    public List<ICommand> getRegistered() {
+        return iCommandList;
     }
 }
