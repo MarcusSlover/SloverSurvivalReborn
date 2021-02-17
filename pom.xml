@@ -85,6 +85,7 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>nms-api</artifactId>
             <version>1.16.5-R0.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
