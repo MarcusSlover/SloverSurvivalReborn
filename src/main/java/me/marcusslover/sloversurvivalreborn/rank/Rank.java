@@ -15,7 +15,7 @@ public class Rank {
         this.prefix = prefix;
         this.color = color;
         this.priority = rankPriorities;
-        rankPriorities --;
+        rankPriorities--;
     }
 
     public String getName() {

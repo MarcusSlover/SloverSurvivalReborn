@@ -1,8 +1,8 @@
 package me.marcusslover.sloversurvivalreborn.rank;
 
-import me.marcusslover.sloversurvivalreborn.code.Init;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
+import me.marcusslover.sloversurvivalreborn.code.Init;
 
 import java.util.List;
 
