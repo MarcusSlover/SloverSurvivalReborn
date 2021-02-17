@@ -61,6 +61,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>libdir</id>
+            <url>file:///${project.basedir}/lib</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -77,5 +81,10 @@
             <version>16.0.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>nms-api</artifactId>
+            <version>1.16.5-R0.1</version>
+        </dependency>
     </dependencies>
 </project>
