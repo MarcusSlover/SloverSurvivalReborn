@@ -3,6 +3,10 @@ package me.marcusslover.sloversurvivalreborn.rank;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
+import me.marcusslover.sloversurvivalreborn.utils.Colors;
+import org.bukkit.ChatColor;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import java.util.List;
 
@@ -10,6 +14,9 @@ public class RankHandler implements ICodeInitializer, IHandler<Rank> {
 
     @Init
     private List<Rank> rankList;
+    @Init
+    private Scoreboard mainScoreboard;
+    private final char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     @Override
     public void initialize() {
@@ -27,6 +34,12 @@ public class RankHandler implements ICodeInitializer, IHandler<Rank> {
     @Override
     public void add(Rank object) {
         rankList.add(object);
+        int priority = object.getPriority();
+        char character = alphabet[priority];
+
+        Team team = mainScoreboard.registerNewTeam(character + object.getName());
+        team.setPrefix(Colors.toColor(object.getPrefix()));
+        team.setColor(ChatColor.WHITE);
     }
 
     @Override
@@ -41,5 +54,9 @@ public class RankHandler implements ICodeInitializer, IHandler<Rank> {
             }
         }
         return null;
+    }
+
+    public Scoreboard getMainScoreboard() {
+        return mainScoreboard;
     }
 }

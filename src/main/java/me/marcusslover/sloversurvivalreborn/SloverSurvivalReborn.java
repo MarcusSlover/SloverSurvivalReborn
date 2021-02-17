@@ -3,6 +3,7 @@ package me.marcusslover.sloversurvivalreborn;
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.command.CommandHandler;
 import me.marcusslover.sloversurvivalreborn.code.data.FileDataHandler;
+import me.marcusslover.sloversurvivalreborn.listener.ChatListener;
 import me.marcusslover.sloversurvivalreborn.listener.ServerListener;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,6 +32,7 @@ public final class SloverSurvivalReborn extends JavaPlugin {
         codeInitializer.add(new RankHandler());
         codeInitializer.add(new FileDataHandler());
         codeInitializer.add(new ServerListener());
+        codeInitializer.add(new ChatListener());
 
         log().info("Initialization done.");
     }

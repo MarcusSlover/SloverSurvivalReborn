@@ -2,7 +2,7 @@ package me.marcusslover.sloversurvivalreborn.rank;
 
 public class Rank {
 
-    private static int rankPriorities = 100;
+    private static int rankPriorities = 10;
 
     private final String name;
     private final String prefix;
@@ -28,5 +28,9 @@ public class Rank {
 
     public String getColor() {
         return color;
+    }
+
+    public int getPriority() {
+        return priority;
     }
 }

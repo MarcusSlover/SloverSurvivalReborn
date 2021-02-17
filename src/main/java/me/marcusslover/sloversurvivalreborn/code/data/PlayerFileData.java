@@ -14,11 +14,11 @@ import java.util.Map;
 @Data(path = "players", type = "json")
 public class PlayerFileData implements IFileData<JsonObject> {
     private static PlayerFileData instance;
-    private final Map<String, JsonObject> jsonObjectMap;
+    private final Map<String, User> map;
 
     public PlayerFileData() {
         instance = this;
-        this.jsonObjectMap = new HashMap<>();
+        this.map = new HashMap<>();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class PlayerFileData implements IFileData<JsonObject> {
                 jsonElement = new JsonObject();
             }
             JsonObject asJsonObject = jsonElement.getAsJsonObject();
-            this.jsonObjectMap.put(key, asJsonObject);
+            this.map.put(key, new User(asJsonObject));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,10 +45,10 @@ public class PlayerFileData implements IFileData<JsonObject> {
     @Override
     public void save(String key) {
         File file = this.getFile(key);
-        JsonObject jsonObject = this.jsonObjectMap.get(key);
+        User user = this.map.get(key);
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(jsonObject.toString());
+            fileWriter.write(user.jsonObject.toString());
             fileWriter.flush();
             fileWriter.close();
         } catch (Exception e) {
@@ -56,8 +56,8 @@ public class PlayerFileData implements IFileData<JsonObject> {
         }
     }
 
-    public Map<String, JsonObject> getMap() {
-        return jsonObjectMap;
+    public Map<String, User> getMap() {
+        return map;
     }
 
     public static PlayerFileData getInstance() {

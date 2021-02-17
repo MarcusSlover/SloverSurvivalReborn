@@ -4,6 +4,7 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.event.IMenu;
 import me.marcusslover.sloversurvivalreborn.code.event.Menu;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -11,11 +12,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CodeInitializer implements IHandler<ICodeInitializer> {
     private static CodeInitializer instance;
@@ -50,9 +54,27 @@ public class CodeInitializer implements IHandler<ICodeInitializer> {
                         accessibilityChange = true;
                     }
                     Class<?> type = field.getType();
+                    // Lists
                     if (type.isAssignableFrom(List.class)) {
                         try {
                             field.set(object, new ArrayList<>());
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    // HashMaps
+                    if (type.isAssignableFrom(Map.class)) {
+                        try {
+                            field.set(object, new HashMap<>());
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    // Scoreboard
+                    if (type.isAssignableFrom(Scoreboard.class)) {
+                        try {
+                            Scoreboard newScoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+                            field.set(object, newScoreboard);
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
                         }
