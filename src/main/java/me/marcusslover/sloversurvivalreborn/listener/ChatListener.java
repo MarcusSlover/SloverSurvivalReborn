@@ -1,10 +1,10 @@
 package me.marcusslover.sloversurvivalreborn.listener;
 
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.code.data.user.UserFileData;
-import me.marcusslover.sloversurvivalreborn.code.data.user.User;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
-import me.marcusslover.sloversurvivalreborn.utils.Colors;
+import me.marcusslover.sloversurvivalreborn.user.User;
+import me.marcusslover.sloversurvivalreborn.user.UserFileData;
+import me.marcusslover.sloversurvivalreborn.utils.ColorUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +29,7 @@ public class ChatListener implements ICodeInitializer, Listener {
             String prefix = rank.getPrefix();
             String color = rank.getColor();
 
-            event.setFormat(Colors.toColor(prefix + "&r " + color + "%s&r:") + " %s");
+            event.setFormat(ColorUtil.toColor(prefix + "&r " + color + "%s&r:") + " %s");
         } else {
             event.setCancelled(true);
         }

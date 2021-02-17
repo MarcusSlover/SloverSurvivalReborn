@@ -3,7 +3,7 @@ package me.marcusslover.sloversurvivalreborn.rank;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
-import me.marcusslover.sloversurvivalreborn.utils.Colors;
+import me.marcusslover.sloversurvivalreborn.utils.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -38,7 +38,7 @@ public class RankHandler implements ICodeInitializer, IHandler<Rank> {
         char character = alphabet[priority];
 
         Team team = mainScoreboard.registerNewTeam(character + object.getName());
-        team.setPrefix(Colors.toColor(object.getPrefix()));
+        team.setPrefix(ColorUtil.toColor(object.getPrefix()));
         team.setColor(ChatColor.WHITE);
     }
 

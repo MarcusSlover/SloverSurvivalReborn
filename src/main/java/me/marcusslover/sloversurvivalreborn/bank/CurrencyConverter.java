@@ -16,6 +16,7 @@ public class CurrencyConverter {
 
     /**
      * Gets a conversion rate.
+     *
      * @return The conversion rate. The diamonds will be rounded.
      */
     public static ConversionRate getConversionRate() {

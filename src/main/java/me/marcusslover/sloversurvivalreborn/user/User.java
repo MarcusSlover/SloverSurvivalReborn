@@ -1,12 +1,12 @@
-package me.marcusslover.sloversurvivalreborn.code.data.user;
+package me.marcusslover.sloversurvivalreborn.user;
 
 import com.google.gson.JsonObject;
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
-import me.marcusslover.sloversurvivalreborn.utils.JsonWrapper;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
+import me.marcusslover.sloversurvivalreborn.utils.JsonModel;
 
-public class User extends JsonWrapper {
+public class User extends JsonModel {
 
     private Rank rank;
 

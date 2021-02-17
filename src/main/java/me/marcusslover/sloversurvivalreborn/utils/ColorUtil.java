@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Colors {
+public class ColorUtil {
 
     public static final Map<String, String> CACHED_FORMATIING = new HashMap<>();
     public static final Pattern STRIP_COLOR = Pattern.compile("(i?)§([0-9A-FK-ORa-fk-orXx])");
@@ -125,9 +125,9 @@ public class Colors {
 
             while (matcher.find()) {
                 try {
-                    float hue = (float) (Numbers.fromFancyDouble(matcher.group(2)) / 360);
-                    float sat = (float) (Numbers.fromFancyDouble(matcher.group(4)) / 100f);
-                    float bri = (float) (Numbers.fromFancyDouble(matcher.group(6)) / 100f);
+                    float hue = (float) (NumberUtil.fromFancyDouble(matcher.group(2)) / 360);
+                    float sat = (float) (NumberUtil.fromFancyDouble(matcher.group(4)) / 100f);
+                    float bri = (float) (NumberUtil.fromFancyDouble(matcher.group(6)) / 100f);
 
                     ChatColor chatColor = ChatColor.of(Color.getHSBColor(hue, sat, bri));
                     copy = copy.replaceFirst(pattern.pattern(), chatColor.toString());

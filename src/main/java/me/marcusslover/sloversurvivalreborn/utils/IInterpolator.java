@@ -1,6 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.utils;
 
 @FunctionalInterface
-interface IInterpolator {
+public interface IInterpolator {
     double[] interpolate(double from, double to, int max);
 }

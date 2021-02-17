@@ -1,15 +1,11 @@
-package me.marcusslover.sloversurvivalreborn.code.data.warp;
+package me.marcusslover.sloversurvivalreborn.warp;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import me.marcusslover.sloversurvivalreborn.code.data.Data;
-import me.marcusslover.sloversurvivalreborn.code.data.DataUtil;
 import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
-import me.marcusslover.sloversurvivalreborn.utils.API;
+import me.marcusslover.sloversurvivalreborn.utils.DataUtil;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;

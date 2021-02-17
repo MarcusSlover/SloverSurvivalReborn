@@ -5,10 +5,10 @@ import com.google.gson.JsonObject;
 
 import java.util.UUID;
 
-public class JsonWrapper {
+public class JsonModel {
     protected JsonObject jsonObject;
 
-    public JsonWrapper(JsonObject jsonObject) {
+    public JsonModel(JsonObject jsonObject) {
         this.jsonObject = jsonObject;
     }
 

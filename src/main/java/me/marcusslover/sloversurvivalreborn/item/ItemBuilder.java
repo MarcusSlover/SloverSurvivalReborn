@@ -1,8 +1,8 @@
 package me.marcusslover.sloversurvivalreborn.item;
 
-import me.marcusslover.sloversurvivalreborn.code.IBuilder;
-import me.marcusslover.sloversurvivalreborn.utils.Colors;
-import me.marcusslover.sloversurvivalreborn.utils.Items;
+import me.marcusslover.sloversurvivalreborn.utils.ColorUtil;
+import me.marcusslover.sloversurvivalreborn.utils.IBuilder;
+import me.marcusslover.sloversurvivalreborn.utils.ItemUtil;
 import net.minecraft.server.v1_16_R3.NBTBase;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import org.bukkit.Material;
@@ -80,11 +80,11 @@ public class ItemBuilder implements IBuilder<ItemStack> {
 
         if (name != null || lore != null) {
             if (name != null) {
-                itemMeta.setDisplayName(Colors.toColor(name));
+                itemMeta.setDisplayName(ColorUtil.toColor(name));
             }
 
             if (lore != null) {
-                List<String> itemLore = lore.stream().map(Colors::toColor).collect(Collectors.toList());
+                List<String> itemLore = lore.stream().map(ColorUtil::toColor).collect(Collectors.toList());
                 itemMeta.setLore(itemLore);
             }
 
@@ -92,7 +92,7 @@ public class ItemBuilder implements IBuilder<ItemStack> {
         }
 
         if (!nbtTagCompound.isEmpty()) {
-            NBTTagCompound tag = Items.getTag(itemStack);
+            NBTTagCompound tag = ItemUtil.getTag(itemStack);
             if (tag == null) {
                 tag = new NBTTagCompound();
             }

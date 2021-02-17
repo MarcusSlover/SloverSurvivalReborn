@@ -22,18 +22,18 @@ public class API {
     public static final String ERROR = "%rgb(176,31,31)➤ %rgb(251,48,48)Error&8: &7";
 
     public static void sendSuccess(CommandSender sender, String message) {
-        sender.sendMessage(Colors.toColor(SUCCESS + message));
+        sender.sendMessage(ColorUtil.toColor(SUCCESS + message));
     }
 
     public static void sendInformation(CommandSender sender, String message) {
-        sender.sendMessage(Colors.toColor(INFO + message));
+        sender.sendMessage(ColorUtil.toColor(INFO + message));
     }
 
     public static void sendError(CommandSender sender, String message) {
-        sender.sendMessage(Colors.toColor(ERROR + message));
+        sender.sendMessage(ColorUtil.toColor(ERROR + message));
     }
 
     public static void sendMessage(CommandSender sender, String message) {
-        sender.sendMessage(Colors.toColor(message));
+        sender.sendMessage(ColorUtil.toColor(message));
     }
 }

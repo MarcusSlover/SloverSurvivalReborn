@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-public class Numbers {
+public class NumberUtil {
 
     public static String toFancyNumber(int num) {
         return NumberFormat.getInstance(Locale.US).format((Integer) num);
