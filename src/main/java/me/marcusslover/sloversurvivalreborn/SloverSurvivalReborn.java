@@ -3,6 +3,7 @@ package me.marcusslover.sloversurvivalreborn;
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.command.CommandHandler;
 import me.marcusslover.sloversurvivalreborn.code.data.FileDataHandler;
+import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.listener.ChatListener;
 import me.marcusslover.sloversurvivalreborn.listener.ServerListener;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
@@ -39,6 +40,21 @@ public final class SloverSurvivalReborn extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        log().info("Disabling file handlers...");
+        FileDataHandler fileDataHandler = CodeInitializer.find(FileDataHandler.class);
+        if (fileDataHandler != null) {
+            for (IFileData<?> iFileData : fileDataHandler.getRegistered()) {
+                try {
+                    iFileData.onDisable();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            log().info("Phase of disabling file handlers - done.");
+        } else {
+            log().warning("An error occurred while disabling file handlers.");
+        }
+
         log().info("The plugin was disabled!");
     }
 

@@ -41,4 +41,8 @@ public interface IFileData<T> {
         }
         return null;
     }
+
+    default void onDisable() {
+
+    }
 }
