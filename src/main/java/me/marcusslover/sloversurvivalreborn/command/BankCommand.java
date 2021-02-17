@@ -15,7 +15,7 @@ public class BankCommand implements PlayerCommand, IMenu {
 
     @Override
     public void onCommand(Player player, String[] args) {
-
+        this.openMenu(player);
     }
 
     private void openMenu(Player player) {

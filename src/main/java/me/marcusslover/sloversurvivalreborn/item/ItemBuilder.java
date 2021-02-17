@@ -2,6 +2,9 @@ package me.marcusslover.sloversurvivalreborn.item;
 
 import me.marcusslover.sloversurvivalreborn.code.IBuilder;
 import me.marcusslover.sloversurvivalreborn.utils.Colors;
+import me.marcusslover.sloversurvivalreborn.utils.Items;
+import net.minecraft.server.v1_16_R3.NBTBase;
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -16,6 +19,7 @@ public class ItemBuilder implements IBuilder<ItemStack> {
     int amount = 0;
     String name = null;
     List<String> lore = null;
+    NBTTagCompound nbtTagCompound = new NBTTagCompound();
 
     public ItemBuilder setMaterial(Material material) {
         this.material = material;
@@ -49,6 +53,26 @@ public class ItemBuilder implements IBuilder<ItemStack> {
         return this;
     }
 
+    public ItemBuilder withTag(String key, String value) {
+        this.nbtTagCompound.setString(key, value);
+        return this;
+    }
+
+    public ItemBuilder withTag(String key, int value) {
+        this.nbtTagCompound.setInt(key, value);
+        return this;
+    }
+
+    public ItemBuilder withTag(String key, double value) {
+        this.nbtTagCompound.setDouble(key, value);
+        return this;
+    }
+
+    public ItemBuilder withTag(String key, boolean value) {
+        this.nbtTagCompound.setBoolean(key, value);
+        return this;
+    }
+
     @Override
     public ItemStack build() {
         ItemStack itemStack = new ItemStack(material, amount);
@@ -66,6 +90,19 @@ public class ItemBuilder implements IBuilder<ItemStack> {
 
             itemStack.setItemMeta(itemMeta);
         }
+
+        if (!nbtTagCompound.isEmpty()) {
+            NBTTagCompound tag = Items.getTag(itemStack);
+            if (tag == null) {
+                tag = new NBTTagCompound();
+            }
+
+            for (String key : nbtTagCompound.getKeys()) {
+                NBTBase nbtBase = nbtTagCompound.get(key);
+                tag.set(key, nbtBase);
+            }
+        }
+
 
         return itemStack;
     }
