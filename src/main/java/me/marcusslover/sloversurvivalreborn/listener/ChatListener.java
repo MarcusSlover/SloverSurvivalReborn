@@ -1,8 +1,8 @@
 package me.marcusslover.sloversurvivalreborn.listener;
 
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.code.data.PlayerFileData;
-import me.marcusslover.sloversurvivalreborn.code.data.User;
+import me.marcusslover.sloversurvivalreborn.code.data.user.UserFileData;
+import me.marcusslover.sloversurvivalreborn.code.data.user.User;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.utils.Colors;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class ChatListener implements ICodeInitializer, Listener {
         UUID uniqueId = player.getUniqueId();
         String key = uniqueId.toString();
 
-        Map<String, User> map = PlayerFileData.getInstance().getMap();
+        Map<String, User> map = UserFileData.getInstance().getMap();
         if (map.containsKey(key)) {
             User user = map.get(key);
             Rank rank = user.getRank();

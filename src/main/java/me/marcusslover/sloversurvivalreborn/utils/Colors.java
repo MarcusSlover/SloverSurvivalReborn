@@ -4,12 +4,15 @@ import net.md_5.bungee.api.ChatColor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Colors {
 
+    public static final Map<String, String> CACHED_FORMATIING = new HashMap<>();
     public static final Pattern STRIP_COLOR = Pattern.compile("(i?)§([0-9A-FK-ORa-fk-orXx])");
     public static final Pattern STRIP_HEX = Pattern.compile("(i?)&[xX]((&[0-9A-FK-ORa-fk-orXx]){6})");
 
@@ -43,14 +46,20 @@ public class Colors {
     }
 
     public static String toColor(String s) {
+        if (CACHED_FORMATIING.containsKey(s)) {
+            return CACHED_FORMATIING.get(s);
+        }
+
         String uni = unicodeConvert(s);
         String hex = colorHex(uni);
         String rgb = colorRgb(hex);
         String hsb = colorHsb(rgb);
         String cint = colorInt(hsb);
         String grad = colorGrad(cint);
+        String s1 = ChatColor.translateAlternateColorCodes('&', grad);
+        CACHED_FORMATIING.put(s, s1);
 
-        return ChatColor.translateAlternateColorCodes('&', grad);
+        return s1;
     }
 
     private static String colorHex(final String string) {

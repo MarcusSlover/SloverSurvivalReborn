@@ -1,8 +1,10 @@
-package me.marcusslover.sloversurvivalreborn.code.data;
+package me.marcusslover.sloversurvivalreborn.code.data.user;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import me.marcusslover.sloversurvivalreborn.code.data.Data;
+import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 
 import java.io.File;
@@ -12,11 +14,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data(path = "players", type = "json")
-public class PlayerFileData implements IFileData<JsonObject> {
-    private static PlayerFileData instance;
+public class UserFileData implements IFileData<JsonObject> {
+    private static UserFileData instance;
     private final Map<String, User> map;
 
-    public PlayerFileData() {
+    public UserFileData() {
         instance = this;
         this.map = new HashMap<>();
     }
@@ -48,7 +50,7 @@ public class PlayerFileData implements IFileData<JsonObject> {
         User user = this.map.get(key);
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(user.jsonObject.toString());
+            fileWriter.write(user.getJsonObject().toString());
             fileWriter.flush();
             fileWriter.close();
         } catch (Exception e) {
@@ -60,7 +62,7 @@ public class PlayerFileData implements IFileData<JsonObject> {
         return map;
     }
 
-    public static PlayerFileData getInstance() {
+    public static UserFileData getInstance() {
         return instance;
     }
 }

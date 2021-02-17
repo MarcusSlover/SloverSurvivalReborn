@@ -1,4 +1,4 @@
-package me.marcusslover.sloversurvivalreborn.code.data;
+package me.marcusslover.sloversurvivalreborn.utils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
