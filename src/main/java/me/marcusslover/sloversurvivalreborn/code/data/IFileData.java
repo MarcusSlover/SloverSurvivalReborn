@@ -4,7 +4,7 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.annotation.Annotation;
+import java.util.Map;
 
 public interface IFileData<T> {
     void read(String key);
@@ -13,36 +13,52 @@ public interface IFileData<T> {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     default File getFile(String key) {
-        SloverSurvivalReborn instance = SloverSurvivalReborn.getInstance();
+        Data data = getDataAnnotation();
+        File dataFolder = getDataFolder();
 
-        Class<? extends IFileData> aClass = this.getClass();
-        Annotation[] annotations = aClass.getAnnotations();
-        for (Annotation annotation : annotations) {
-            if (annotation instanceof Data) {
-                Data data = (Data) annotation;
-                String path = data.path();
-                String type = data.type();
-
-                File playersFolder = new File(instance.getDataFolder(), path);
-                if (playersFolder.exists()) {
-                    playersFolder.mkdirs();
-                }
-
-                File playerData = new File(playersFolder, key + "." + type);
-                if (playerData.exists()) {
-                    try {
-                        playerData.createNewFile();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return playerData;
+        File dataFile = new File(dataFolder, key + "." + data.type());
+        if (dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        return null;
+        return dataFile;
+    }
+
+    default File getDataFolder() {
+        SloverSurvivalReborn instance = SloverSurvivalReborn.getInstance();
+
+        Data data = getDataAnnotation();
+        File dataFolder = new File(instance.getDataFolder(), data.path());
+        if (dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
+        return dataFolder;
+    }
+
+    default Data getDataAnnotation() {
+        Data data = Cache.getAnnot(this.getClass());
+        if (data == null)
+            data = this.getClass().getDeclaredAnnotation(Data.class);
+        if (data == null)
+            throw new RuntimeException("IFileData class doesn't have @Data annotation");
+        return data;
     }
 
     default void onDisable() {
 
+    }
+
+    class Cache {
+        private static Map<Class<? extends IFileData>, Data> cache;
+
+        static Data getAnnot(Class<? extends IFileData> clz) {
+            return cache.get(clz);
+        }
+        static void setAnnot(Class<? extends IFileData> clz, Data data) {
+            cache.put(clz, data);
+        }
     }
 }

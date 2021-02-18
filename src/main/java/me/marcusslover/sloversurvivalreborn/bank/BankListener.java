@@ -1,11 +1,13 @@
 package me.marcusslover.sloversurvivalreborn.bank;
 
+import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -44,6 +46,14 @@ public class BankListener implements Listener {
         }
 
         Bank.setDiamondCount(Bank.getDiamondCount() + diamonds);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        BankAccount<?> acc = Bank.loadBankAccount(event.getPlayer().getUniqueId());
+        if (acc == null) {
+            Bank.createPlayerAccount(event.getPlayer());
+        }
     }
 
     @EventHandler

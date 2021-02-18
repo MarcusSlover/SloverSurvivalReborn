@@ -1,4 +1,4 @@
-package me.marcusslover.sloversurvivalreborn.bank;
+package me.marcusslover.sloversurvivalreborn.bank.accounts;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

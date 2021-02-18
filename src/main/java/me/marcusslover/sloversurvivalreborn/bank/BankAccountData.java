@@ -1,6 +1,9 @@
 package me.marcusslover.sloversurvivalreborn.bank;
 
 import com.google.gson.JsonObject;
+import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
+import me.marcusslover.sloversurvivalreborn.bank.accounts.JointBankAccount;
+import me.marcusslover.sloversurvivalreborn.bank.accounts.PlayerBankAccount;
 import me.marcusslover.sloversurvivalreborn.code.data.Data;
 import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.utils.DataUtil;
@@ -90,6 +93,8 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
     public void saveBank() {
         bankData.addProperty("rate", CurrencyConverter.getConversionRateValue());
         bankData.addProperty("diamondCount", Bank.getDiamondCount());
+        bankData.add("tax", Taxer.getJson());
+        bankData.addProperty("timer", Bank.getBankTime());
         try {
             DataUtil.writeJsonElement(bankData, getFile("bank"));
         } catch (IOException e) {

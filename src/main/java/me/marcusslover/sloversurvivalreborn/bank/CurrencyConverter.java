@@ -18,7 +18,7 @@ public class CurrencyConverter {
     }
 
     public static void update() {
-        BigDecimal avgBalance = Bank.getAverageBalance();
+        BigDecimal avgBalance = Bank.getAveragePlayerBalance();
         conversionRate = avgBalance.divide(BigDecimal.valueOf(Bank.getDiamondCount()), Bank.MAX_PRECISION, RoundingMode.HALF_EVEN).doubleValue();
     }
 
