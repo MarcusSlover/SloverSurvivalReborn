@@ -1,9 +1,11 @@
 package me.marcusslover.sloversurvivalreborn.bank;
 
 import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
+import me.marcusslover.sloversurvivalreborn.utils.API;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -52,7 +54,9 @@ public class BankListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         BankAccount<?> acc = Bank.loadBankAccount(event.getPlayer().getUniqueId());
         if (acc == null) {
-            Bank.createPlayerAccount(event.getPlayer());
+            Player p = event.getPlayer();
+            Bank.createPlayerAccount(p);
+            API.sendMessage(p, "%hex(db800f)You now have a new bank account. Use /bank to view the menu.");
         }
     }
 

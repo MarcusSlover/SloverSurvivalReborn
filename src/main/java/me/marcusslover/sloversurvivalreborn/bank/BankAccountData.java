@@ -20,7 +20,6 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
     public static BankAccountData instance = new BankAccountData();
 
     private JsonObject bankData;
-    private HashMap<UUID, BankAccount<?>> uncached;
 
     public BankAccountData() {
     }
@@ -33,25 +32,21 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
             try {
                 JsonObject obj = DataUtil.readJsonElement(file).getAsJsonObject();
                 BankAccount<?> account = null;
-                boolean cache = true;
                 switch (obj.get("type").getAsString().toLowerCase()) {
-                    case "player":
+                    case PlayerBankAccount.TYPE:
                         account = new PlayerBankAccount(id);
-                        if (Bukkit.getPlayer(id) == null) {
-                            cache = false;
-                        }
                         break;
-                    case "joint":
+                    case JointBankAccount.TYPE:
                         account = new JointBankAccount(id);
                         break;
-                    case "system":
+                    case Bank.SystemBankAccount.TYPE:
                         Bank.account = new Bank.SystemBankAccount();
                         account = Bank.account;
+                        // IIRC this will work
                 }
                 if (account != null)
                     account.load(obj);
-                if (cache) Bank.accounts.put(id, account);
-                else uncached.put(id, account);
+                Bank.accounts.put(id, account);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -62,13 +57,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
     public void save(String key) {
         BankAccount<?> account = getAccount(key);
         JsonObject obj = account.toJson();
-        String type = "unknown";
-
-        if (account instanceof PlayerBankAccount) type = "player";
-        if (account instanceof JointBankAccount) type = "joint";
-        if (account instanceof Bank.SystemBankAccount) type = "system";
-
-        obj.addProperty("type", type);
+        obj.addProperty("type", account.getType());
         obj.addProperty("id", account.getAccountId().toString());
         try {
             DataUtil.writeJsonElement(obj, getFile(key));

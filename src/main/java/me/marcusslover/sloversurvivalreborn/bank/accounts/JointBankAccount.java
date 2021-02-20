@@ -4,16 +4,19 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class JointBankAccount extends BankAccount<JointBankAccount> {
+    public static final String TYPE = "joint";
     private UUID accountId;
     private List<UUID> parties;
 
     public JointBankAccount(UUID id) {
         super(id);
         this.accountId = id;
+        this.parties = new ArrayList<>();
     }
 
     public void addParty(UUID uuid) {
@@ -35,7 +38,7 @@ public class JointBankAccount extends BankAccount<JointBankAccount> {
 
     @Override
     public void load(JsonObject object) {
-        this.balance = object.get("balance").getAsBigDecimal();
+        super.load(object);
         this.accountId = UUID.fromString(object.get("id").getAsString());
         JsonArray parties = object.get("parties").getAsJsonArray();
         for (int i = 0; i < parties.size(); i++) {
@@ -45,14 +48,17 @@ public class JointBankAccount extends BankAccount<JointBankAccount> {
 
     @Override
     public JsonObject toJson() {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("balance", this.balance);
-        obj.addProperty("id", accountId.toString());
+        JsonObject obj = super.toJson();
         JsonArray parties = new JsonArray();
         for (UUID party : this.parties) {
             parties.set(parties.size(), new JsonPrimitive(party.toString()));
         }
         obj.add("parties", parties);
         return obj;
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 }

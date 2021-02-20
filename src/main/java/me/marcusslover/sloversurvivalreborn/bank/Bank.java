@@ -138,6 +138,8 @@ public class Bank implements ICodeInitializer {
 
     public static class SystemBankAccount extends BankAccount<SystemBankAccount> {
 
+        public static final String TYPE = "system";
+
         public SystemBankAccount() {
             super(null);
         }
@@ -157,6 +159,22 @@ public class Bank implements ICodeInitializer {
             JsonObject obj = new JsonObject();
             obj.addProperty("balance", this.balance);
             return obj;
+        }
+
+        @Override
+        public String getType() {
+            return TYPE;
+        }
+
+        @Override
+        public boolean canAfford(BigDecimal cost) {
+            return true;
+        }
+
+        @Override
+        public void save() {
+            super.save();
+            Bank.account = this;
         }
     }
 

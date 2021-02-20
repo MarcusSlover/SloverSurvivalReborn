@@ -11,7 +11,6 @@ import java.util.Map;
 public class MenuBuilder implements IBuilder<Inventory> {
     int size = 0;
     String name = null;
-
     Map<Integer, ItemStack> items = null;
 
     public MenuBuilder withSize(int size) {
@@ -32,11 +31,42 @@ public class MenuBuilder implements IBuilder<Inventory> {
         return this;
     }
 
+
+    public MenuBuilder withBorder(ItemStack item, boolean override) {
+        int height = getHeight();
+        // left & right sides
+        for (int i = 0; i < height; i++) {
+            int index = i * 9;
+            if (override || !hasItemAtIndex(index))
+                withItem(index, item);
+            if (override || !hasItemAtIndex(index + 8))
+                withItem(index + 8, item);
+        }
+        int heightOffset = (height * 9);
+        // top & bottom sides
+        for (int i = 1; i < 8; i++) { // small optimisation
+            if (override || !hasItemAtIndex(i))
+                withItem(i, item);
+            if (override || !hasItemAtIndex(i + heightOffset))
+            withItem(i + heightOffset, item);
+        }
+
+        return this;
+    }
+
     @Override
     public Inventory build() {
         Inventory inventory = Bukkit.createInventory(null, size, name);
         items.forEach(inventory::setItem);
 
         return inventory;
+    }
+
+    private int getHeight() {
+        return (size - (size % 9)) / 9;
+    }
+
+    public boolean hasItemAtIndex(int index) {
+        return items.containsKey(index);
     }
 }

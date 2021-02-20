@@ -36,7 +36,7 @@ public class Taxer {
             BigDecimal greatTaxBegin = avgBalance.multiply(BEGIN_GREAT_TAX);
             if (balance.compareTo(greatTaxBegin) > 0) {
                 BigDecimal ratio = balance.divide(greatTaxBegin, mctx);
-                return Math.max(getTaxRate(avgBalance), Math.min(.325, BigDecimalMath.log10(ratio, mctx).divide(BigDecimal.valueOf(2), mctx).doubleValue()));
+                return Math.max(getTaxRate(avgBalance), Math.min(.352, BigDecimalMath.log10(ratio, mctx).divide(BigDecimal.valueOf(2), mctx).doubleValue()));
             }
 
             BigDecimal ratio = balance.divide(taxBegin, mctx);
