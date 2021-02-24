@@ -81,6 +81,7 @@
             <version>16.0.1</version>
         </dependency>
 
+        <!-- file:///${project.basedir}/lib -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>nms-api</artifactId>
