@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 repositories {
@@ -18,7 +19,18 @@ def library(String libname) {
     return files("lib/${libname}.jar")
 }
 dependencies {
-    runtimeClasspath 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
-    runtimeClasspath library('nms')
+    compileClasspath 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    compileClasspath library('nms')
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'ch.obermuhlner:big-math:2.3.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+}
+
+def relocatePackage(String pkg) {
+    shadowJar.relocate(pkg, "me.marcusslover.sloversurvivalreborn.internal.${pkg}")
+}
+relocatePackage('com.google.gson')
+
+build {
+    dependsOn shadowJar
 }
