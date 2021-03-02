@@ -103,3 +103,7 @@ buildNumber.properties
 # Common working directory
 run/
 /server/
+
+# Gradle
+.gradle/
+build/
