@@ -8,13 +8,10 @@ import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
 import me.marcusslover.sloversurvivalreborn.code.data.IJsonable;
 import me.marcusslover.sloversurvivalreborn.utils.HashUtil;
 import me.marcusslover.sloversurvivalreborn.utils.StringUtil;
-import org.jetbrains.annotations.NotNull;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

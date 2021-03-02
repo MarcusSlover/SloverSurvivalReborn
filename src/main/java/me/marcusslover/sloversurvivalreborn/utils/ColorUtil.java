@@ -70,12 +70,16 @@ public class ColorUtil {
             if (!string.contains(s1)) {
                 continue;
             }
-            Pattern pattern = Pattern.compile("%" + s1 + "(\\()(#[a-fA-F0-9]{6})(\\))");
+            Pattern pattern = Pattern.compile("%" + s1 + "(\\()(#?[a-fA-F0-9]{6})(\\))");
             Matcher matcher = pattern.matcher(copy); // match to the string
 
             while (matcher.find()) {
                 try {
-                    ChatColor chatColor = ChatColor.of(matcher.group(2));
+                    String group = matcher.group(2);
+                    if (!group.startsWith("#")) {
+                        group = "#" + group;
+                    }
+                    ChatColor chatColor = ChatColor.of(group);
                     copy = copy.replaceFirst(pattern.pattern(), chatColor.toString());
                 } catch (Exception ignored) {
                     return string;

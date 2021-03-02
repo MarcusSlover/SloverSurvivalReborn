@@ -6,6 +6,7 @@ import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
 import me.marcusslover.sloversurvivalreborn.command.BankCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
+import me.marcusslover.sloversurvivalreborn.command.WarpCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
@@ -25,6 +28,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
     public void initialize() {
         add(new SpawnCommand());
         add(new BankCommand());
+        add(new WarpCommand());
     }
 
     @Override
@@ -39,6 +43,11 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
             if (annotation instanceof Command) {
                 Command command = (Command) annotation;
                 String name = command.name();
+                String description = command.description();
+                List<String> aliases = new ArrayList<>();
+                if (command.aliases().length >= 1) {
+                    aliases.addAll(Arrays.asList(command.aliases()));
+                }
 
                 // Additional check
                 for (ICommand iCommand : iCommandList) {
@@ -61,7 +70,9 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
                 isCommand = true;
                 SloverSurvivalReborn instance = SloverSurvivalReborn.getInstance();
                 SimpleCommandMap commandMap = ((CraftServer) instance.getServer()).getCommandMap();
-                commandMap.register(name, new org.bukkit.command.Command(name) {
+
+                // Spigot command
+                commandMap.register(name, new org.bukkit.command.Command(name, description, "", aliases) {
                     @Override
                     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
                         if (sender instanceof Player) {
