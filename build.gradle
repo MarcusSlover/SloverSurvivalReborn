@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter();
+    maven {
+        name 'sonatype'
+        url 'https://oss.sonatype.com/content/repositories/snapshots'
+    }
+    maven {
+        name 'spigot'
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+    }
+}
+
+def library(String libname) {
+    return files("lib/${libname}.jar")
+}
+dependencies {
+    runtimeClasspath 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    runtimeClasspath library('nms')
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
