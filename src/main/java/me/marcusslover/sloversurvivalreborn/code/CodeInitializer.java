@@ -3,6 +3,7 @@ package me.marcusslover.sloversurvivalreborn.code;
 import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.event.IMenu;
 import me.marcusslover.sloversurvivalreborn.code.event.Menu;
+import me.marcusslover.sloversurvivalreborn.item.MenuBuilder;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
@@ -16,10 +17,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CodeInitializer implements IHandler<ICodeInitializer> {
     private static CodeInitializer instance;
@@ -94,6 +92,9 @@ public class CodeInitializer implements IHandler<ICodeInitializer> {
                         pluginManager.registerEvents(new Listener() {
                             @EventHandler
                             public void onClick(final InventoryClickEvent event) {
+                                if (event.getClickedInventory() == null) return;
+                                int hashcode = Arrays.hashCode(event.getClickedInventory().getStorageContents());
+                                if (!MenuBuilder.menus.contains(hashcode)) return;
                                 if (event.getView().getTitle().equalsIgnoreCase(name)) {
                                     HumanEntity whoClicked = event.getWhoClicked();
                                     iMenu.onClick((Player) whoClicked, event);

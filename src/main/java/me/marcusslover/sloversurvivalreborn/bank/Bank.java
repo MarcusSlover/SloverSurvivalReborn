@@ -1,7 +1,5 @@
 package me.marcusslover.sloversurvivalreborn.bank;
 
-import ch.obermuhlner.math.big.BigDecimalMath;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
@@ -13,9 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;

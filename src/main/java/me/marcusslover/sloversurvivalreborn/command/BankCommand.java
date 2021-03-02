@@ -73,15 +73,17 @@ public class BankCommand implements PlayerCommand, IMenu {
                 .withSize(5 * 9)
                 .withItem(4, ITEM_HEADER)
                 .withItem(18 + 3, ITEM_MANAGE_ACCOUNTS)
+                .withItem(18 + 5, ITEM_STATISTICS)
                 .withBorder(ITEM_BORDER, false);
 
         Inventory inventory = builder.build();
-
         player.openInventory(inventory);
     }
 
     @Override
     public void onClick(Player player, InventoryClickEvent event) {
+
+
         event.setCancelled(true);
     }
 }

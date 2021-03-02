@@ -5,10 +5,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MenuBuilder implements IBuilder<Inventory> {
+    public static final List<Integer> menus = new ArrayList<>();
     int size = 0;
     String name = null;
     Map<Integer, ItemStack> items = null;
@@ -58,7 +58,8 @@ public class MenuBuilder implements IBuilder<Inventory> {
     public Inventory build() {
         Inventory inventory = Bukkit.createInventory(null, size, name);
         items.forEach(inventory::setItem);
-
+        int hashcode = Arrays.hashCode(inventory.getStorageContents());
+        if (!menus.contains(hashcode)) menus.add(hashcode);
         return inventory;
     }
 
