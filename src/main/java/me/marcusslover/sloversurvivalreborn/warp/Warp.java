@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import me.marcusslover.sloversurvivalreborn.utils.JsonModel;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -18,11 +19,13 @@ public class Warp extends JsonModel {
     private double z;
     private float yaw;
     private float pitch;
-    private String name;
+    private String worldName;
     private List<String> whitelist;
     private Type type;
     private UUID owner;
     private UUID warpId;
+    private String warpName;
+    private Material warpIcon;
 
     public Warp(JsonObject jsonObject) {
         super(jsonObject);
@@ -31,13 +34,15 @@ public class Warp extends JsonModel {
 
     private void init() {
         this.warpId = getUUID("id", UUID.randomUUID());
+        this.warpName = getString("name", "Warp");
+        this.warpIcon = getMaterial("icon", Material.DIRT);
         this.owner = getUUID("owner", null);
         this.x = getDouble("x", 0.0d);
         this.y = getDouble("y", 0.0d);
         this.z = getDouble("z", 0.0d);
         this.yaw = getFloat("yaw", 0.0f);
         this.pitch = getFloat("pitch", 0.0f);
-        this.name = getString("world", "");
+        this.worldName = getString("world", "");
         this.whitelist = getStringList("whitelist", new ArrayList<>());
         this.type = getEnum("type", Type.class, Type.PRIVATE);
     }
@@ -57,7 +62,7 @@ public class Warp extends JsonModel {
         this.z = location.getZ();
         this.yaw = location.getYaw();
         this.pitch = location.getPitch();
-        this.name = location.getWorld().getName();
+        this.worldName = location.getWorld().getName();
         setDouble("x", location.getX());
         setDouble("y", location.getY());
         setDouble("z", location.getZ());
@@ -67,7 +72,7 @@ public class Warp extends JsonModel {
     }
 
     public Location getLocation() {
-        World world = Bukkit.getWorld(name);
+        World world = Bukkit.getWorld(worldName);
         return new Location(world, x, y, z, yaw, pitch);
     }
 
@@ -85,7 +90,7 @@ public class Warp extends JsonModel {
             this.whitelist.add(string);
             added = true;
         }
-        setWhitelist(whitelist);
+        this.setWhitelist(this.whitelist);
         return added;
     }
 
@@ -98,6 +103,24 @@ public class Warp extends JsonModel {
         return whitelist;
     }
 
+    public String getWarpName() {
+        return warpName;
+    }
+
+    public void setWarpName(String warpName) {
+        this.warpName = warpName;
+        setString("name", warpName);
+    }
+
+    public Material getWarpIcon() {
+        return warpIcon;
+    }
+
+    public void setWarpIcon(Material warpIcon) {
+        this.warpIcon = warpIcon;
+        setMaterial("icon", warpIcon);
+    }
+
     public UUID getWarpId() {
         return warpId;
     }
@@ -108,6 +131,10 @@ public class Warp extends JsonModel {
 
     public void setOwner(UUID owner) {
         this.owner = owner;
+    }
+
+    public void setWorldName(String worldName) {
+        this.worldName = worldName;
     }
 
     public enum Type {

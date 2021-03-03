@@ -3,6 +3,7 @@ package me.marcusslover.sloversurvivalreborn.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,8 +163,15 @@ public class JsonModel {
     public <T extends Enum<T>> T getEnum(String path, Class<T> enumType, Enum<?> defaultValue) {
         String string = this.getString(path, defaultValue.toString());
         return Enum.valueOf(enumType, string);
-}
+    }
 
+    public void setMaterial(String path, Material material) {
+        this.setString(path, material.toString());
+    }
+
+    public Material getMaterial(String path, Material defaultValue) {
+        return Material.matchMaterial(getString(path, defaultValue.toString()));
+    }
 
     public JsonObject getJsonObject() {
         return jsonObject;
