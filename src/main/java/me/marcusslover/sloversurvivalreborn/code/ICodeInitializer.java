@@ -2,6 +2,7 @@ package me.marcusslover.sloversurvivalreborn.code;
 
 import me.marcusslover.sloversurvivalreborn.utils.API;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public interface ICodeInitializer {
@@ -39,7 +40,7 @@ public interface ICodeInitializer {
 
     @SuppressWarnings("rawtypes")
     class Cache {
-        private static Map<Class<? extends ICodeInitializer>, PatchVersion> cache;
+        private static final Map<Class<? extends ICodeInitializer>, PatchVersion> cache = new HashMap<>();
 
         static PatchVersion getAnnot(Class<? extends ICodeInitializer> clz) {
             return cache.get(clz);

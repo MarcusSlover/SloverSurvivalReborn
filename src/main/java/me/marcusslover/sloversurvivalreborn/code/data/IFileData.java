@@ -4,6 +4,7 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface IFileData<T> {
@@ -53,7 +54,7 @@ public interface IFileData<T> {
 
     @SuppressWarnings("rawtypes")
     class Cache {
-        private static Map<Class<? extends IFileData>, Data> cache;
+        private static final Map<Class<? extends IFileData>, Data> cache = new HashMap<>();
 
         static Data getAnnot(Class<? extends IFileData> clz) {
             return cache.get(clz);
