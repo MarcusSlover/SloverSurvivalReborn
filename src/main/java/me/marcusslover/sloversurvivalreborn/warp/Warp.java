@@ -63,6 +63,19 @@ public class Warp extends JsonModel {
         return new Location(world, x, y, z, yaw, pitch);
     }
 
+    public void setWhitelist(List<String> whitelist) {
+        this.whitelist = whitelist;
+        setStringList("whitelist", whitelist);
+    }
+
+    public List<String> getWhitelist() {
+        return whitelist;
+    }
+
+    public UUID getOwner() {
+        return owner;
+    }
+
     public enum Type {
         PUBLIC,
         PRIVATE, // aka personal home
