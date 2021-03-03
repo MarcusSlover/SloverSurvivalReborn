@@ -3,6 +3,7 @@ package me.marcusslover.sloversurvivalreborn.command;
 import me.marcusslover.sloversurvivalreborn.code.command.Command;
 import me.marcusslover.sloversurvivalreborn.code.command.PlayerCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
+import me.marcusslover.sloversurvivalreborn.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -17,8 +18,6 @@ public class SpawnCommand implements PlayerCommand {
         World world = Bukkit.getWorlds().get(0);
         Location location = new Location(world, 0.5, 100, 0.5, 0f, 0f);
         player.teleport(location);
-        player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 2.0f);
-
-        API.sendSuccess(player, "You were teleported to spawn!");
+        ChatUtil.success(player, "You were teleported to spawn!");
     }
 }

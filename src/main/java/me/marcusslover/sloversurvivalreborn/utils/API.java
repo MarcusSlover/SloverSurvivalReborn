@@ -17,21 +17,6 @@ public class API {
     }
 
     public static final JsonParser JSON_PARSER = new JsonParser();
-    public static final String SUCCESS = "%rgb(100,176,28)➤ %rgb(129,216,46)Success&8: &7";
-    public static final String INFO = "%rgb(4,165,186)➤ %rgb(54,183,199)Info&8: &7";
-    public static final String ERROR = "%rgb(176,31,31)➤ %rgb(251,48,48)Error&8: &7";
-
-    public static void sendSuccess(CommandSender sender, String message) {
-        sender.sendMessage(ColorUtil.toColor(SUCCESS + message));
-    }
-
-    public static void sendInformation(CommandSender sender, String message) {
-        sender.sendMessage(ColorUtil.toColor(INFO + message));
-    }
-
-    public static void sendError(CommandSender sender, String message) {
-        sender.sendMessage(ColorUtil.toColor(ERROR + message));
-    }
 
     public static void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(ColorUtil.toColor(message));
