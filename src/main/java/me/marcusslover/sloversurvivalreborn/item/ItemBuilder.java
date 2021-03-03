@@ -21,7 +21,7 @@ public class ItemBuilder implements IBuilder<ItemStack> {
     List<String> lore = null;
     NBTTagCompound nbtTagCompound = new NBTTagCompound();
 
-    public ItemBuilder setMaterial(Material material) {
+    public ItemBuilder withMaterial(Material material) {
         this.material = material;
         return this;
     }

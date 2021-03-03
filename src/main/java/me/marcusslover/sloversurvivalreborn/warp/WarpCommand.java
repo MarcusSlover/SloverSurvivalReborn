@@ -17,7 +17,7 @@ public class WarpCommand implements PlayerCommand, IMenu {
 
     static {
         ITEM_BORDER = new ItemBuilder()
-                .setMaterial(Material.LIGHT_BLUE_STAINED_GLASS_PANE)
+                .withMaterial(Material.LIGHT_BLUE_STAINED_GLASS_PANE)
                 .withName("&r")
                 .withAmount(1)
                 .build();

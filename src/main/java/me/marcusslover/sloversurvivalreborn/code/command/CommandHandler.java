@@ -8,6 +8,7 @@ import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.bank.BankCommand;
 import me.marcusslover.sloversurvivalreborn.command.EnderChestCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
+import me.marcusslover.sloversurvivalreborn.rank.RankCommand;
 import me.marcusslover.sloversurvivalreborn.warp.WarpCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 import me.marcusslover.sloversurvivalreborn.utils.ChatUtil;
@@ -32,6 +33,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
         add(new BankCommand());
         add(new WarpCommand());
         add(new EnderChestCommand());
+        add(new RankCommand());
     }
 
     @Override
