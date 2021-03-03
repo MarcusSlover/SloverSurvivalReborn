@@ -15,6 +15,12 @@ repositories {
     }
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 def library(String libname) {
     return files("lib/${libname}.jar")
 }
