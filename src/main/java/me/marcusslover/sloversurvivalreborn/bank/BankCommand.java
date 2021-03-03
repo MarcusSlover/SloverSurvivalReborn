@@ -1,4 +1,4 @@
-package me.marcusslover.sloversurvivalreborn.command;
+package me.marcusslover.sloversurvivalreborn.bank;
 
 import me.marcusslover.sloversurvivalreborn.code.command.Command;
 import me.marcusslover.sloversurvivalreborn.code.command.PlayerCommand;

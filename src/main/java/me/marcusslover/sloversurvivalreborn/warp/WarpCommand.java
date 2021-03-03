@@ -1,4 +1,4 @@
-package me.marcusslover.sloversurvivalreborn.command;
+package me.marcusslover.sloversurvivalreborn.warp;
 
 import me.marcusslover.sloversurvivalreborn.code.command.Command;
 import me.marcusslover.sloversurvivalreborn.code.command.PlayerCommand;
