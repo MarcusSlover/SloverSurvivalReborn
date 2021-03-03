@@ -18,7 +18,7 @@ public interface IFileData<T> {
         File dataFolder = getDataFolder();
 
         File dataFile = new File(dataFolder, key + "." + data.type());
-        if (dataFile.exists()) {
+        if (!dataFile.exists()) {
             try {
                 dataFile.createNewFile();
             } catch (IOException e) {
@@ -33,7 +33,7 @@ public interface IFileData<T> {
 
         Data data = getDataAnnotation();
         File dataFolder = new File(instance.getDataFolder(), data.path());
-        if (dataFolder.exists()) {
+        if (!dataFolder.exists()) {
             dataFolder.mkdirs();
         }
         return dataFolder;
