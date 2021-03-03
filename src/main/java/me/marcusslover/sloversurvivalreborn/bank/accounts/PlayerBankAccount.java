@@ -1,7 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.bank.accounts;
 
 import com.google.gson.JsonObject;
-import me.marcusslover.sloversurvivalreborn.bank.Bank;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

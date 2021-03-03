@@ -1,6 +1,5 @@
 package me.marcusslover.sloversurvivalreborn.shop;
 
-import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
 import me.marcusslover.sloversurvivalreborn.bank.accounts.PlayerBankAccount;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;

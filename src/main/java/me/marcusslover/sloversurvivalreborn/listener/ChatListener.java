@@ -1,6 +1,7 @@
 package me.marcusslover.sloversurvivalreborn.listener;
 
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.user.User;
 import me.marcusslover.sloversurvivalreborn.user.UserFileData;
@@ -13,6 +14,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import java.util.Map;
 import java.util.UUID;
 
+@PatchVersion
 public class ChatListener implements ICodeInitializer, Listener {
 
     @EventHandler

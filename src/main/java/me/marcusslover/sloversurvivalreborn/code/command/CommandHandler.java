@@ -4,12 +4,12 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.command.BankCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
 import me.marcusslover.sloversurvivalreborn.command.WarpCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
 import me.marcusslover.sloversurvivalreborn.utils.ChatUtil;
-import me.marcusslover.sloversurvivalreborn.utils.ColorUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.SimpleCommandMap;
@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.annotation.Annotation;
 import java.util.*;
 
+@PatchVersion(version = "1.1.0")
 public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
     @Init
     private List<ICommand> iCommandList;

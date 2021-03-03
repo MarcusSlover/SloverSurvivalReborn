@@ -5,12 +5,15 @@ import me.marcusslover.sloversurvivalreborn.utils.API;
 import java.util.Map;
 
 public interface ICodeInitializer {
-    default void initialize() {
-    }
+    default void initialize() {}
 
     default String getVersion() {
-        PatchVersion dataAnnotation = this.getDataAnnotation();
-        return dataAnnotation.version();
+        try {
+            PatchVersion dataAnnotation = this.getDataAnnotation();
+            return dataAnnotation.version();
+        } catch (Exception e) {
+            return "NULL";
+        }
     }
 
     default void initLog(String message) {
@@ -41,6 +44,7 @@ public interface ICodeInitializer {
         static PatchVersion getAnnot(Class<? extends ICodeInitializer> clz) {
             return cache.get(clz);
         }
+
         static void setAnnot(Class<? extends ICodeInitializer> clz, PatchVersion data) {
             cache.put(clz, data);
         }

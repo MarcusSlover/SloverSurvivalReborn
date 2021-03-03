@@ -6,6 +6,7 @@ import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
 import me.marcusslover.sloversurvivalreborn.bank.accounts.JointBankAccount;
 import me.marcusslover.sloversurvivalreborn.bank.accounts.PlayerBankAccount;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -16,6 +17,7 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@PatchVersion(version = "1.1.5")
 public class Bank implements ICodeInitializer {
     public static final int MAX_PRECISION = 16;
     private static volatile long diamondCount;

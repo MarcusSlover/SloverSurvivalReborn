@@ -3,6 +3,7 @@ package me.marcusslover.sloversurvivalreborn.rank;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.utils.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Scoreboard;
@@ -10,6 +11,7 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.List;
 
+@PatchVersion(version = "1.0.1")
 public class RankHandler implements ICodeInitializer, IHandler<Rank> {
 
     @Init
