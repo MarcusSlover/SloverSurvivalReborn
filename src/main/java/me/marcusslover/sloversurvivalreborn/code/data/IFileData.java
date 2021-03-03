@@ -51,6 +51,7 @@ public interface IFileData<T> {
 
     }
 
+    @SuppressWarnings("rawtypes")
     class Cache {
         private static Map<Class<? extends IFileData>, Data> cache;
 

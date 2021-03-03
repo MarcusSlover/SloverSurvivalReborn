@@ -8,6 +8,7 @@ import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.listener.ChatListener;
 import me.marcusslover.sloversurvivalreborn.listener.ServerListener;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
+import me.marcusslover.sloversurvivalreborn.warp.WarpManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -36,6 +37,7 @@ public final class SloverSurvivalReborn extends JavaPlugin {
         codeInitializer.add(new ServerListener());
         codeInitializer.add(new ChatListener());
         codeInitializer.add(new Bank());
+        codeInitializer.add(new WarpManager());
 
         log().info("Initialization done.");
     }

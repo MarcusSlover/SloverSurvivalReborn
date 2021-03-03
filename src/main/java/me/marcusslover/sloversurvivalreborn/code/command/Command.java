@@ -12,4 +12,5 @@ public @interface Command {
     String name();
     String description() default "";
     String[] aliases() default {};
+    long cooldown() default -1L;
 }

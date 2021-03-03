@@ -8,6 +8,8 @@ import me.marcusslover.sloversurvivalreborn.command.BankCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
 import me.marcusslover.sloversurvivalreborn.command.WarpCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
+import me.marcusslover.sloversurvivalreborn.utils.ChatUtil;
+import me.marcusslover.sloversurvivalreborn.utils.ColorUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.SimpleCommandMap;
@@ -16,9 +18,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
     @Init
@@ -70,14 +70,29 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
                 isCommand = true;
                 SloverSurvivalReborn instance = SloverSurvivalReborn.getInstance();
                 SimpleCommandMap commandMap = ((CraftServer) instance.getServer()).getCommandMap();
+                long cooldown = command.cooldown();
+                long finalTime = cooldown * 1000;
 
                 // Spigot command
                 commandMap.register(name, new org.bukkit.command.Command(name, description, "", aliases) {
+                    private final Map<UUID, Long> cooldownMap = new HashMap<>();
+
                     @Override
                     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
                         if (sender instanceof Player) {
                             Player player = (Player) sender;
                             if (object instanceof PlayerCommand) {
+                                if (cooldown > 0) {
+                                    long playerTime = cooldownMap.getOrDefault(player.getUniqueId(), -1L);
+                                    long time = System.currentTimeMillis() - playerTime;
+                                    if (time < finalTime) {
+                                        long difference = (finalTime - time) / 1000;
+                                        ChatUtil.error(player, String.format("Wait! You can't execute this command for another %s seconds!", difference));
+                                        return true;
+                                    }
+                                    cooldownMap.put(player.getUniqueId(), System.currentTimeMillis());
+                                }
+
                                 PlayerCommand playerCommand = (PlayerCommand) object;
                                 playerCommand.onCommand(player, args);
                             }

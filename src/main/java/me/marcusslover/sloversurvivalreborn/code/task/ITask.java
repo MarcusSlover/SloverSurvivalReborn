@@ -7,4 +7,8 @@ public interface ITask {
     static void applyAsync(Runnable runnable) {
         Bukkit.getScheduler().runTaskAsynchronously(SloverSurvivalReborn.getInstance(), runnable);
     }
+
+    static void applySync(Runnable runnable) {
+        Bukkit.getScheduler().runTask(SloverSurvivalReborn.getInstance(), runnable);
+    }
 }
