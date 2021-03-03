@@ -35,7 +35,7 @@ public class BankCommand implements PlayerCommand, IMenu {
 
         ITEM_BORDER = new ItemBuilder()
                 .setMaterial(Material.YELLOW_STAINED_GLASS_PANE)
-                .withName("")
+                .withName("&r")
                 .withAmount(1)
                 .build();
 
