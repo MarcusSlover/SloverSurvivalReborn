@@ -5,13 +5,18 @@ import me.marcusslover.sloversurvivalreborn.utils.JsonModel;
 
 public class Warp extends JsonModel {
 
+    private double x;
+
     public Warp(JsonObject jsonObject) {
         super(jsonObject);
-        this.refresh();
+        this.init();
     }
 
-    public void refresh() {
-
-
+    private void init() {
+        this.x = getDouble("x", 0.0d);
+        this.y = getDouble("y", 0.0d);
+        this.z = getDouble("z", 0.0d);
+        this.pitch = getFl("pitch", 0.0d);
     }
+
 }

@@ -52,6 +52,19 @@ public class JsonModel {
         return defaultValue;
     }
 
+    public void setFloat(String path, float value) {
+        jsonObject.addProperty(path, value);
+    }
+
+    public float getFloat(String path, float defaultValue) {
+        if (jsonObject.has(path)) {
+            return jsonObject.get(path).getAsFloat();
+        } else {
+            this.setFloat(path, defaultValue);
+        }
+        return defaultValue;
+    }
+
     public void setUUID(String path, UUID value) {
         jsonObject.addProperty(path, value.toString());
     }
