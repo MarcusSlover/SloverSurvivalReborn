@@ -11,7 +11,7 @@ public class MenuBuilder implements IBuilder<Inventory> {
     public static final List<Integer> menus = new ArrayList<>();
     int size = 0;
     String name = null;
-    Map<Integer, ItemStack> items = null;
+    Map<Integer, ItemStack> items = new HashMap<>();
 
     public MenuBuilder withSize(int size) {
         this.size = size;
@@ -24,9 +24,6 @@ public class MenuBuilder implements IBuilder<Inventory> {
     }
 
     public MenuBuilder withItem(int slot, ItemStack itemStack) {
-        if (items == null) {
-            items = new HashMap<>();
-        }
         items.put(slot, itemStack);
         return this;
     }
