@@ -100,9 +100,6 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
                         return true;
                     }
                 });
-
-                this.initLog(object.getClass().getName());
-                break;
             }
         }
 
@@ -111,6 +108,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
             return;
         }
         iCommandList.add(object);
+        this.initLog(object.getClass().getName());
     }
 
     @Override
