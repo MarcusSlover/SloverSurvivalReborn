@@ -61,7 +61,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
 
                     for (Annotation annotation1 : annotations1) {
                         if (annotation1 instanceof Command) {
-                            Command command1 = (Command) annotation;
+                            Command command1 = (Command) annotation1;
                             String name1 = command1.name();
 
                             if (name.equalsIgnoreCase(name1)) {
@@ -79,7 +79,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
                 long finalTime = cooldown * 1000;
 
                 // Spigot command
-                commandMap.register(name, new org.bukkit.command.Command(name, description, "", aliases) {
+                commandMap.register(name, "sloversurvivalreborn", new org.bukkit.command.Command(name, description, "", aliases) {
                     private final Map<UUID, Long> cooldownMap = new HashMap<>();
 
                     @Override
