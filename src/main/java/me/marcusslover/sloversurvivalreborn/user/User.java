@@ -12,10 +12,10 @@ public class User extends JsonModel {
 
     public User(JsonObject jsonObject) {
         super(jsonObject);
-        this.refresh();
+        this.init();
     }
 
-    public void refresh() {
+    public void init() {
         String rankId = this.getString("rank", "rookie");
         RankHandler rankHandler = CodeInitializer.find(RankHandler.class);
         Rank rank = rankHandler.find(rankId);

@@ -1,4 +1,4 @@
-package me.marcusslover.sloversurvivalreborn.command;
+package me.marcusslover.sloversurvivalreborn.bank;
 
 import me.marcusslover.sloversurvivalreborn.code.command.Command;
 import me.marcusslover.sloversurvivalreborn.code.command.PlayerCommand;
@@ -22,7 +22,7 @@ public class BankCommand implements PlayerCommand, IMenu {
 
     static {
         ITEM_HEADER = new ItemBuilder()
-                .setMaterial(Material.GOLD_INGOT)
+                .withMaterial(Material.GOLD_INGOT)
                 .withName("%hex(edbe13)Bank Menu")
                 .withAmount(1)
                 .withLore(
@@ -34,13 +34,13 @@ public class BankCommand implements PlayerCommand, IMenu {
                 .build();
 
         ITEM_BORDER = new ItemBuilder()
-                .setMaterial(Material.YELLOW_STAINED_GLASS_PANE)
-                .withName("")
+                .withMaterial(Material.YELLOW_STAINED_GLASS_PANE)
+                .withName("&r")
                 .withAmount(1)
                 .build();
 
         ITEM_MANAGE_ACCOUNTS = new ItemBuilder()
-                .setMaterial(Material.ENDER_CHEST)
+                .withMaterial(Material.ENDER_CHEST)
                 .withName("%hex(3049b0)Manage Accounts")
                 .withAmount(1)
                 .withLore(
@@ -52,7 +52,7 @@ public class BankCommand implements PlayerCommand, IMenu {
                 .build();
 
         ITEM_STATISTICS = new ItemBuilder()
-                .setMaterial(Material.BARREL)
+                .withMaterial(Material.BARREL)
                 .withName("%hex(f5b802)Statistics")
                 .withAmount(1)
                 .withLore(

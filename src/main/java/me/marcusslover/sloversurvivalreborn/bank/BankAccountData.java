@@ -7,12 +7,10 @@ import me.marcusslover.sloversurvivalreborn.bank.accounts.PlayerBankAccount;
 import me.marcusslover.sloversurvivalreborn.code.data.Data;
 import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.utils.DataUtil;
-import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.UUID;
 
 @Data(path = "bank", type = "json")

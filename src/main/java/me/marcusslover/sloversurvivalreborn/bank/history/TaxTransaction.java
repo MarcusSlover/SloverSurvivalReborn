@@ -1,7 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.bank.history;
 
 import com.google.gson.JsonObject;
-import me.marcusslover.sloversurvivalreborn.bank.Bank;
 import me.marcusslover.sloversurvivalreborn.bank.accounts.BankAccount;
 
 import java.math.BigDecimal;

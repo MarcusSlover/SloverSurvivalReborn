@@ -1,8 +1,12 @@
 package me.marcusslover.sloversurvivalreborn.utils;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.bukkit.Material;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class JsonModel {
@@ -48,6 +52,19 @@ public class JsonModel {
             return jsonObject.get(path).getAsDouble();
         } else {
             this.setDouble(path, defaultValue);
+        }
+        return defaultValue;
+    }
+
+    public void setFloat(String path, float value) {
+        jsonObject.addProperty(path, value);
+    }
+
+    public float getFloat(String path, float defaultValue) {
+        if (jsonObject.has(path)) {
+            return jsonObject.get(path).getAsFloat();
+        } else {
+            this.setFloat(path, defaultValue);
         }
         return defaultValue;
     }
@@ -115,6 +132,45 @@ public class JsonModel {
             this.setJsonArray(path, defaultValue);
         }
         return defaultValue;
+    }
+
+    public void setStringList(String path, List<String> value) {
+        JsonArray jsonArray = new JsonArray();
+        for (String s : value) {
+            jsonArray.add(s);
+        }
+        this.setJsonArray(path, jsonArray);
+    }
+
+    public List<String> getStringList(String path, List<String> defaultValue) {
+        if (jsonObject.has(path)) {
+            List<String> strings = new ArrayList<>();
+            JsonArray asJsonArray = jsonObject.get(path).getAsJsonArray();
+            for (JsonElement jsonElement : asJsonArray) {
+                strings.add(jsonElement.getAsString());
+            }
+            return strings;
+        } else {
+            this.setStringList(path, defaultValue);
+        }
+        return defaultValue;
+    }
+
+    public void setEnum(String path, Enum<?> value) {
+        this.setString(path, value.toString());
+    }
+
+    public <T extends Enum<T>> T getEnum(String path, Class<T> enumType, Enum<?> defaultValue) {
+        String string = this.getString(path, defaultValue.toString());
+        return Enum.valueOf(enumType, string);
+    }
+
+    public void setMaterial(String path, Material material) {
+        this.setString(path, material.toString());
+    }
+
+    public Material getMaterial(String path, Material defaultValue) {
+        return Material.matchMaterial(getString(path, defaultValue.toString()));
     }
 
     public JsonObject getJsonObject() {

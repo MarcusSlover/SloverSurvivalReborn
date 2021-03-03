@@ -2,6 +2,7 @@ package me.marcusslover.sloversurvivalreborn.listener;
 
 import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.code.task.ITask;
 import me.marcusslover.sloversurvivalreborn.rank.Rank;
 import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
@@ -19,6 +20,7 @@ import org.bukkit.scoreboard.Team;
 import java.util.Map;
 import java.util.UUID;
 
+@PatchVersion(version = "2.0.0")
 public class ServerListener implements ICodeInitializer, Listener {
 
     @EventHandler

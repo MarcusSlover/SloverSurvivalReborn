@@ -1,7 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.bank.accounts;
 
 import com.google.gson.JsonObject;
-import me.marcusslover.sloversurvivalreborn.bank.Bank;
 import me.marcusslover.sloversurvivalreborn.bank.BankAccountData;
 import me.marcusslover.sloversurvivalreborn.bank.history.TransactionHistory;
 import me.marcusslover.sloversurvivalreborn.bank.history.TransferTransaction;

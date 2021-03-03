@@ -4,10 +4,14 @@ import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
-import me.marcusslover.sloversurvivalreborn.command.BankCommand;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
+import me.marcusslover.sloversurvivalreborn.bank.BankCommand;
+import me.marcusslover.sloversurvivalreborn.command.EnderChestCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
-import me.marcusslover.sloversurvivalreborn.command.WarpCommand;
+import me.marcusslover.sloversurvivalreborn.rank.RankCommand;
+import me.marcusslover.sloversurvivalreborn.warp.WarpCommand;
 import me.marcusslover.sloversurvivalreborn.utils.API;
+import me.marcusslover.sloversurvivalreborn.utils.ChatUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.SimpleCommandMap;
@@ -16,10 +20,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
+@PatchVersion(version = "1.1.0")
 public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
     @Init
     private List<ICommand> iCommandList;
@@ -29,6 +32,8 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
         add(new SpawnCommand());
         add(new BankCommand());
         add(new WarpCommand());
+        add(new EnderChestCommand());
+        add(new RankCommand());
     }
 
     @Override
@@ -56,7 +61,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
 
                     for (Annotation annotation1 : annotations1) {
                         if (annotation1 instanceof Command) {
-                            Command command1 = (Command) annotation;
+                            Command command1 = (Command) annotation1;
                             String name1 = command1.name();
 
                             if (name.equalsIgnoreCase(name1)) {
@@ -70,14 +75,29 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
                 isCommand = true;
                 SloverSurvivalReborn instance = SloverSurvivalReborn.getInstance();
                 SimpleCommandMap commandMap = ((CraftServer) instance.getServer()).getCommandMap();
+                long cooldown = command.cooldown();
+                long finalTime = cooldown * 1000;
 
                 // Spigot command
-                commandMap.register(name, new org.bukkit.command.Command(name, description, "", aliases) {
+                commandMap.register(name, "sloversurvivalreborn", new org.bukkit.command.Command(name, description, "", aliases) {
+                    private final Map<UUID, Long> cooldownMap = new HashMap<>();
+
                     @Override
                     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
                         if (sender instanceof Player) {
                             Player player = (Player) sender;
                             if (object instanceof PlayerCommand) {
+                                if (cooldown > 0) {
+                                    long playerTime = cooldownMap.getOrDefault(player.getUniqueId(), -1L);
+                                    long time = System.currentTimeMillis() - playerTime;
+                                    if (time < finalTime) {
+                                        long difference = (finalTime - time) / 1000;
+                                        ChatUtil.error(player, String.format("Wait! You can't execute this command for another %s seconds!", difference));
+                                        return true;
+                                    }
+                                    cooldownMap.put(player.getUniqueId(), System.currentTimeMillis());
+                                }
+
                                 PlayerCommand playerCommand = (PlayerCommand) object;
                                 playerCommand.onCommand(player, args);
                             }
@@ -85,9 +105,6 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
                         return true;
                     }
                 });
-
-                this.initLog(object.getClass().getName());
-                break;
             }
         }
 
@@ -96,6 +113,7 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
             return;
         }
         iCommandList.add(object);
+        this.initLog(object.getClass().getName());
     }
 
     @Override

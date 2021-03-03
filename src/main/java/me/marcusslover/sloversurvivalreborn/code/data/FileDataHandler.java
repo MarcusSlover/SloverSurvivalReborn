@@ -4,11 +4,13 @@ import me.marcusslover.sloversurvivalreborn.bank.BankAccountData;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.IHandler;
 import me.marcusslover.sloversurvivalreborn.code.Init;
+import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.user.UserFileData;
 import me.marcusslover.sloversurvivalreborn.warp.WarpFileData;
 
 import java.util.List;
 
+@PatchVersion(version = "2.0.0")
 public class FileDataHandler implements ICodeInitializer, IHandler<IFileData<?>> {
     @Init
     private List<IFileData<?>> dataList;

@@ -34,14 +34,18 @@ public class WarpFileData implements IFileData<JsonObject> {
     @Override
     public void save(String key) {
         File file = this.getFile(key);
-        Warp warp = this.map.get(key);
-        try {
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(warp.getJsonObject().toString());
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (this.map.containsKey(key)) {
+            Warp warp = this.map.get(key);
+            try {
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(warp.getJsonObject().toString());
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            file.delete();
         }
     }
 
