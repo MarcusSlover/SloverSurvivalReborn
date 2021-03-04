@@ -1,27 +1,24 @@
 package me.marcusslover.sloversurvivalreborn.listener;
 
-import me.marcusslover.sloversurvivalreborn.code.CodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
 import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
 import me.marcusslover.sloversurvivalreborn.code.task.ITask;
-import me.marcusslover.sloversurvivalreborn.rank.Rank;
-import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
-import me.marcusslover.sloversurvivalreborn.user.User;
 import me.marcusslover.sloversurvivalreborn.user.UserFileData;
+import me.marcusslover.sloversurvivalreborn.utils.RankUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 
-import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @PatchVersion(version = "2.0.0")
 public class ServerListener implements ICodeInitializer, Listener {
+    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
 
     @EventHandler
     public void onLogin(AsyncPlayerPreLoginEvent loginEvent) {
@@ -39,29 +36,21 @@ public class ServerListener implements ICodeInitializer, Listener {
         Player player = event.getPlayer();
         UUID uniqueId = player.getUniqueId();
         String key = uniqueId.toString();
+        UserFileData userFileData = UserFileData.getInstance();
 
-        RankHandler rankHandler = CodeInitializer.find(RankHandler.class);
-        if (rankHandler != null) {
-            Scoreboard mainScoreboard = rankHandler.getMainScoreboard();
+        EXECUTOR_SERVICE.submit(() -> {
+            while (true) {
+                if (!player.isOnline()) {
+                    return false;
+                }
 
-            UserFileData instance = UserFileData.getInstance();
-            Map<String, User> map = instance.getMap();
-
-            User user = map.get(key);
-            Rank rank = user.getRank();
-            String name = rank.getName();
-
-            for (Team team : mainScoreboard.getTeams()) {
-                if (team.getName().contains(name)) {
-                    if (team.hasEntry(player.getName())) {
-                        break;
-                    }
-                    team.addEntry(player.getName());
-                    break;
+                if (userFileData.getMap().containsKey(key)) {
+                    ITask.applySync(() -> RankUtil.updateScoreboard(player));
+                    return true;
                 }
             }
-            player.setScoreboard(mainScoreboard);
-        }
+        });
+
     }
 
     @EventHandler
