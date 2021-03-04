@@ -40,7 +40,9 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
                     case Bank.SystemBankAccount.TYPE:
                         Bank.account = new Bank.SystemBankAccount();
                         account = Bank.account;
-                        // IIRC this will work
+                        break;
+                    default:
+                        System.out.println("Invalid account type");
                 }
                 if (account != null)
                     account.load(obj);
@@ -67,12 +69,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
     JsonObject readBank() {
         if (bankData == null) {
             File file = getFile("bank", false);
-            try {
-                bankData = DataUtil.readJsonElement(file).getAsJsonObject();
-            } catch (FileNotFoundException e) {
-                bankData = new JsonObject();
-                saveBank(); // i know, clever right?
-            }
+            bankData = DataUtil.readJsonElement(file, new JsonObject()).getAsJsonObject();
         }
         return bankData;
     }
