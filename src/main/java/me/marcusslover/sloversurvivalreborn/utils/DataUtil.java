@@ -9,16 +9,16 @@ import me.marcusslover.sloversurvivalreborn.code.data.IJsonable;
 import java.io.*;
 
 public class DataUtil {
-    public static JsonElement readJsonElement(File file) throws FileNotFoundException {
-        FileReader fileReader = new FileReader(file);
-        JsonElement element = null;
+    public static JsonElement readJsonElement(File file) {
+        return readJsonElement(file, null);
+    }
+    public static JsonElement readJsonElement(File file, JsonElement def) {
+        JsonElement element = def;
         try {
+            FileReader fileReader = new FileReader(file);
             element = API.JSON_PARSER.parse(fileReader);
-        } catch (JsonSyntaxException jsonSyntaxException) {
-            jsonSyntaxException.printStackTrace();
-        }
-        if (element == null) {
-            element = new JsonObject();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return element;
     }
