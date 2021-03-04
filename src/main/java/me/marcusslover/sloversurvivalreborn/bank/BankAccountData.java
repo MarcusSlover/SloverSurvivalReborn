@@ -71,9 +71,6 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
             File file = getFile("bank", false);
             bankData = DataUtil.readJsonElement(file, new JsonObject()).getAsJsonObject();
         }
-        if (bankData.size() <= 0) {
-            this.save("bank");
-        }
 
         return bankData;
     }
