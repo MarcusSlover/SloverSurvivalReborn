@@ -1,10 +1,7 @@
 package me.marcusslover.sloversurvivalreborn.code.command;
 
 import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
-import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
-import me.marcusslover.sloversurvivalreborn.code.IHandler;
-import me.marcusslover.sloversurvivalreborn.code.Init;
-import me.marcusslover.sloversurvivalreborn.code.PatchVersion;
+import me.marcusslover.sloversurvivalreborn.code.*;
 import me.marcusslover.sloversurvivalreborn.bank.BankCommand;
 import me.marcusslover.sloversurvivalreborn.command.EnderChestCommand;
 import me.marcusslover.sloversurvivalreborn.command.SpawnCommand;
@@ -113,7 +110,8 @@ public class CommandHandler implements ICodeInitializer, IHandler<ICommand> {
             return;
         }
         iCommandList.add(object);
-        this.initLog(object.getClass().getName());
+        CodeInitializer codeInitializer = CodeInitializer.getInstance();
+        codeInitializer.add(object);
     }
 
     @Override
