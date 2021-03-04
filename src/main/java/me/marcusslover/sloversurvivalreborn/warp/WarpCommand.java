@@ -25,7 +25,9 @@ public class WarpCommand implements PlayerCommand, IMenu {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        this.openMenu(player);
+        if (args.length == 0) {
+            this.openMenu(player);
+        }
     }
 
     private void openMenu(Player player) {
@@ -33,6 +35,8 @@ public class WarpCommand implements PlayerCommand, IMenu {
                 .withName("Warp Menu")
                 .withSize(6 * 9)
                 .withBorder(ITEM_BORDER, false);
+
+
 
         Inventory inventory = builder.build();
         player.openInventory(inventory);
