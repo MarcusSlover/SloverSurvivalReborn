@@ -13,12 +13,12 @@ public interface IFileData<T> {
     void save(String key);
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    default File getFile(String key) {
+    default File getFile(String key, boolean createIfNotExists) {
         Data data = getDataAnnotation();
         File dataFolder = getDataFolder();
 
         File dataFile = new File(dataFolder, key + "." + data.type());
-        if (!dataFile.exists()) {
+        if (createIfNotExists && !dataFile.exists()) {
             try {
                 dataFile.createNewFile();
             } catch (IOException e) {

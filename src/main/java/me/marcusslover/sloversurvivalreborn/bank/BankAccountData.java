@@ -26,7 +26,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
     public void read(String key) {
         UUID id = UUID.fromString(key);
         if (!Bank.accounts.containsKey(id)) {
-            File file = getFile(key);
+            File file = getFile(key, false);
             try {
                 JsonObject obj = DataUtil.readJsonElement(file).getAsJsonObject();
                 BankAccount<?> account = null;
@@ -58,7 +58,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
         obj.addProperty("type", account.getType());
         obj.addProperty("id", account.getAccountId().toString());
         try {
-            DataUtil.writeJsonElement(obj, getFile(key));
+            DataUtil.writeJsonElement(obj, getFile(key, true));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
 
     JsonObject readBank() {
         if (bankData == null) {
-            File file = getFile("bank");
+            File file = getFile("bank", false);
             try {
                 bankData = DataUtil.readJsonElement(file).getAsJsonObject();
             } catch (FileNotFoundException e) {
@@ -83,7 +83,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
         bankData.add("tax", Taxer.getJson());
         bankData.addProperty("timer", Bank.getBankTime());
         try {
-            DataUtil.writeJsonElement(bankData, getFile("bank"));
+            DataUtil.writeJsonElement(bankData, getFile("bank", true));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,7 +95,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
         return account;
     }
     public boolean exists(String key) {
-        return getFile(key).exists();
+        return getFile(key, false).exists();
     }
 
     public void setAccount(String key, BankAccount<?> account) {

@@ -22,7 +22,7 @@ public class WarpFileData implements IFileData<JsonObject> {
 
     @Override
     public void read(String key) {
-        File file = this.getFile(key);
+        File file = this.getFile(key, true);
         try {
             JsonObject obj = DataUtil.readJsonElement(file).getAsJsonObject();
             this.map.put(key, new Warp(obj));
@@ -33,7 +33,7 @@ public class WarpFileData implements IFileData<JsonObject> {
 
     @Override
     public void save(String key) {
-        File file = this.getFile(key);
+        File file = this.getFile(key, true);
         if (this.map.containsKey(key)) {
             Warp warp = this.map.get(key);
             try {
