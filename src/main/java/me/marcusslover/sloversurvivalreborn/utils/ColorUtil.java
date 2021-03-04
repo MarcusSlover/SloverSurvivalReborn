@@ -46,6 +46,7 @@ public class ColorUtil {
     public static final String LIGHT_MARINE = "%hex(#6FFFC4)";
     public static final String DARK_MARINE = "%hex(#00AF67)";
     public static final String AQUA = "%hex(#00FFE8)";
+    public static final String LEGACY_AQUA = "&b";
     public static final String LIGHT_AQUA = "%hex(#76FFF3)";
     public static final String DARK_AQUA = "%hex(#00BCAC)";
     public static final String BLUE = "%hex(#00B9FF)";
