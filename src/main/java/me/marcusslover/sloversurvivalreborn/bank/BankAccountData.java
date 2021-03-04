@@ -71,6 +71,7 @@ public class BankAccountData implements IFileData<BankAccount<?>> {
             File file = getFile("bank", false);
             bankData = DataUtil.readJsonElement(file, new JsonObject()).getAsJsonObject();
         }
+
         return bankData;
     }
 
