@@ -13,12 +13,12 @@ public class DataUtil {
         return readJsonElement(file, null);
     }
     public static JsonElement readJsonElement(File file, JsonElement def) {
-        JsonElement element = def;
+        JsonElement element;
         try {
             FileReader fileReader = new FileReader(file);
             element = API.JSON_PARSER.parse(fileReader);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            return def;
         }
         return element;
     }
