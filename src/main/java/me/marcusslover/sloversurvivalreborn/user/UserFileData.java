@@ -1,6 +1,7 @@
 package me.marcusslover.sloversurvivalreborn.user;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import me.marcusslover.sloversurvivalreborn.code.data.Data;
 import me.marcusslover.sloversurvivalreborn.code.data.IFileData;
 import me.marcusslover.sloversurvivalreborn.utils.DataUtil;
@@ -24,7 +25,7 @@ public class UserFileData implements IFileData<JsonObject> {
     public void read(String key) {
         File file = this.getFile(key, true);
         try {
-            JsonObject obj = DataUtil.readJsonElement(file).getAsJsonObject();
+            JsonObject obj = DataUtil.readJsonElement(file, new JsonObject()).getAsJsonObject();
             this.map.put(key, new User(obj));
         } catch (Exception e) {
             e.printStackTrace();
