@@ -26,13 +26,15 @@ public interface ICodeInitializer {
     }
 
     default void log(String prefix, String message) {
-        API.getLogger().info(String.format("[%s] %s", prefix, message));
+        API.getLogger().info(String.format("[%s] %s ", prefix, message));
     }
 
     default PatchVersion getDataAnnotation() {
         PatchVersion patchVersion = ICodeInitializer.Cache.getAnnot(this.getClass());
-        if (patchVersion == null)
+        if (patchVersion == null) {
             patchVersion = this.getClass().getDeclaredAnnotation(PatchVersion.class);
+            ICodeInitializer.Cache.setAnnot(this.getClass(), patchVersion);
+        }
         if (patchVersion == null)
             throw new RuntimeException("ICodeInitializer class doesn't have @PatchVersion annotation");
         return patchVersion;

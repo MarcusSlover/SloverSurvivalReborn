@@ -1,6 +1,7 @@
 package me.marcusslover.sloversurvivalreborn.code.data;
 
 import me.marcusslover.sloversurvivalreborn.SloverSurvivalReborn;
+import me.marcusslover.sloversurvivalreborn.code.event.IMenu;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,8 +42,10 @@ public interface IFileData<T> {
 
     default Data getDataAnnotation() {
         Data data = Cache.getAnnot(this.getClass());
-        if (data == null)
+        if (data == null) {
             data = this.getClass().getDeclaredAnnotation(Data.class);
+            IFileData.Cache.setAnnot(this.getClass(), data);
+        }
         if (data == null)
             throw new RuntimeException("IFileData class doesn't have @Data annotation");
         return data;

@@ -1,4 +1,6 @@
 package me.marcusslover.sloversurvivalreborn.code.command;
 
-public interface ICommand {
+import me.marcusslover.sloversurvivalreborn.code.ICodeInitializer;
+
+public interface ICommand extends ICodeInitializer {
 }

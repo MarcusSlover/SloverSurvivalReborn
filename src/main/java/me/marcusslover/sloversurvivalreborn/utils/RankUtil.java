@@ -6,6 +6,10 @@ import me.marcusslover.sloversurvivalreborn.rank.RankHandler;
 import me.marcusslover.sloversurvivalreborn.user.User;
 import me.marcusslover.sloversurvivalreborn.user.UserFileData;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
+
+import java.util.Map;
 
 public class RankUtil {
 
@@ -29,5 +33,30 @@ public class RankUtil {
     public static void missingMessage(Player player, String rank) {
         Rank rank1 = findRank(rank);
         ChatUtil.error(player, "You have to be "+rank1.getPrefix()+"%hex(#CBCBCB) or higher!");
+    }
+
+    public static void updateScoreboard(Player player) {
+        RankHandler rankHandler = CodeInitializer.find(RankHandler.class);
+        if (rankHandler != null) {
+            Scoreboard mainScoreboard = rankHandler.getMainScoreboard();
+
+            UserFileData instance = UserFileData.getInstance();
+            Map<String, User> map = instance.getMap();
+
+            User user = map.get(player.getUniqueId().toString());
+            Rank rank = user.getRank();
+            String name = rank.getName();
+
+            for (Team team : mainScoreboard.getTeams()) {
+                if (team.getName().contains(name)) {
+                    if (team.hasEntry(player.getName())) {
+                        break;
+                    }
+                    team.addEntry(player.getName());
+                    break;
+                }
+            }
+            player.setScoreboard(mainScoreboard);
+        }
     }
 }
