@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import static me.marcusslover.sloversurvivalreborn.utils.ColorUtil.LIGHT_GRAY;
+import static me.marcusslover.sloversurvivalreborn.utils.ColorUtil.*;
 
 @Command(name = "bank")
 @Menu(name = "Bank Menu")
@@ -25,13 +25,13 @@ public class BankCommand implements PlayerCommand, IMenu {
     static {
         ITEM_HEADER = new ItemBuilder()
                 .withMaterial(Material.GOLD_INGOT)
-                .withName("%hex(edbe13)Bank Menu")
+                .withName(GOLD + "Bank Menu")
                 .withAmount(1)
                 .withLore(
-                        LIGHT_GRAY +"Through the Bank menu you can do things such as:",
-                        LIGHT_GRAY +"- Transfer doubloons from and to accounts",
-                        LIGHT_GRAY +"- Convert diamonds to doubloons",
-                        LIGHT_GRAY +"- View how much tax you have to pay"
+                        LIGHT_GRAY + "Through the Bank menu you can do things such as:",
+                        LIGHT_GRAY + "- Transfer doubloons from and to accounts",
+                        LIGHT_GRAY + "- Convert diamonds to doubloons",
+                        LIGHT_GRAY + "- View how much tax you have to pay"
                 )
                 .build();
 
@@ -43,23 +43,23 @@ public class BankCommand implements PlayerCommand, IMenu {
 
         ITEM_MANAGE_ACCOUNTS = new ItemBuilder()
                 .withMaterial(Material.ENDER_CHEST)
-                .withName("%hex(3049b0)Manage Accounts")
+                .withName(BLUE + "Manage Accounts")
                 .withAmount(1)
                 .withLore(
-                        LIGHT_GRAY +"- Create joint accounts with others",
-                        LIGHT_GRAY +"- Transfer doubloons between accounts",
-                        LIGHT_GRAY +"- Convert diamonds to doubloons and vice versa.",
-                        LIGHT_GRAY +"- View taxes."
+                        LIGHT_GRAY + "- Create joint accounts with others",
+                        LIGHT_GRAY + "- Transfer doubloons between accounts",
+                        LIGHT_GRAY + "- Convert diamonds to doubloons and vice versa.",
+                        LIGHT_GRAY + "- View taxes."
                 )
                 .build();
 
         ITEM_STATISTICS = new ItemBuilder()
                 .withMaterial(Material.BARREL)
-                .withName("%hex(f5b802)Statistics")
+                .withName(LIME + "Statistics")
                 .withAmount(1)
                 .withLore(
-                        LIGHT_GRAY +"- View top player balances",
-                        LIGHT_GRAY +"- View taxes paid over time"
+                        LIGHT_GRAY + "- View top player balances",
+                        LIGHT_GRAY + "- View taxes paid over time"
                 )
                 .build();
     }
