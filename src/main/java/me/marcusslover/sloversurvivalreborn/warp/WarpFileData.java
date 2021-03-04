@@ -24,13 +24,14 @@ public class WarpFileData implements IFileData<JsonObject> {
     public void read(String key) {
         File file = this.getFile(key, true);
         try {
-            JsonObject obj = DataUtil.readJsonElement(file).getAsJsonObject();
+            JsonObject obj = DataUtil.readJsonElement(file, new JsonObject()).getAsJsonObject();
             this.map.put(key, new Warp(obj));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void save(String key) {
         File file = this.getFile(key, true);
