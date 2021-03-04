@@ -117,9 +117,11 @@ public class Bank implements ICodeInitializer {
     @Override
     public void initialize() {
         JsonObject bankData = BankAccountData.instance.readBank();
-        CurrencyConverter.conversionRate = bankData.get("rate").getAsDouble();
-        Taxer.load(bankData.get("tax").getAsJsonObject());
-        diamondCount = bankData.get("diamondCount").getAsLong();
+        if (bankData.has("rate"))
+            CurrencyConverter.conversionRate = bankData.get("rate").getAsDouble();
+        Taxer.load(bankData.has("tax") ? bankData.get("tax").getAsJsonObject() : new JsonObject());
+        if (bankData.has("diamondCount"))
+            diamondCount = bankData.get("diamondCount").getAsLong();
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
         bankUpdateRunnable = new BankUpdateRunnable(bankData.get("timer").getAsLong());
