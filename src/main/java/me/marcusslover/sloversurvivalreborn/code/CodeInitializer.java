@@ -114,9 +114,9 @@ public class CodeInitializer implements IHandler<ICodeInitializer> {
 
         try {
             String version = object.getVersion();
-            object.log(object.getClass().getSimpleName() + "Initializing v"+version+"...");
+            object.log(object.getClass().getSimpleName() + " Initializing v"+version+"...");
             object.initialize();
-            object.log(object.getClass().getSimpleName() + "Done!");
+            object.log(object.getClass().getSimpleName() + " Done!");
 
         } catch (Exception e) {
             e.printStackTrace();

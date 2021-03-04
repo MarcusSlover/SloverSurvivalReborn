@@ -26,7 +26,7 @@ public interface ICodeInitializer {
     }
 
     default void log(String prefix, String message) {
-        API.getLogger().info(String.format("[%s] %s", prefix, message));
+        API.getLogger().info(String.format("[%s] %s ", prefix, message));
     }
 
     default PatchVersion getDataAnnotation() {
