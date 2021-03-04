@@ -7,10 +7,12 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import static me.marcusslover.sloversurvivalreborn.utils.ColorUtil.LIGHT_GRAY;
+
 public class ChatUtil {
-    public static final String SUCCESS = "%hex(#6BFF33)⬛ %hex(#CBCBCB)";
-    public static final String INFO = "%hex(#FF3333)⬛ %hex(#CBCBCB)";
-    public static final String ERROR = "%hex(#33C1FF)⬛ %hex(#CBCBCB)";
+    public static final String SUCCESS = "%hex(#6BFF33)⬛ "+ LIGHT_GRAY;
+    public static final String INFO = "%hex(#FF3333)⬛ "+ LIGHT_GRAY;
+    public static final String ERROR = "%hex(#33C1FF)⬛ "+ LIGHT_GRAY;
 
     public static void success(Player player, String message) {
         player.sendMessage(ColorUtil.toColor(SUCCESS + message));

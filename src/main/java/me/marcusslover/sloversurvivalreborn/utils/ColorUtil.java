@@ -12,6 +12,58 @@ import java.util.regex.Pattern;
 
 public class ColorUtil {
 
+    public static final String LEGACY_DARK_RED = "&4";
+    public static final String DARK_RED = "%hex(#FF0000)";
+    public static final String LEGACY_RED = "&c";
+    public static final String RED = "%hex(#FF4848)";
+    public static final String PINK = "%hex(#FF67AD)";
+    public static final String LEGACY_PINK = "&d";
+    public static final String LIGHT_PINK = "%hex(#FFB2D6)";
+    public static final String PURPLE = "%hex(#8400FF)";
+    public static final String LEGACY_PURPLE = "&5";
+    public static final String LIGHT_PURPLE = "%hex(#C484FF)";
+    public static final String MAGENTA = "%hex(#FF0097)";
+    public static final String LIGHT_MAGENTA = "%hex(#FF61BE)";
+    public static final String FUCHSIA = "%hex(#D600C8)";
+    public static final String DARK_ORANGE = "%hex(#FF4600)";
+    public static final String ORANGE = "%hex(#FF8300)";
+    public static final String LIGHT_ORANGE = "%hex(#FF956C)";
+    public static final String YELLOW = "%hex(#FFFF00)";
+    public static final String LEGACY_YELLOW = "&e";
+    public static final String GOLD = "%hex(#FED23C)";
+    public static final String LEGACY_GOLD = "&6";
+    public static final String LIME = "%hex(#C9FF00)";
+    public static final String LEGACY_LIME = "&a";
+    public static final String LIGHT_LIME = "%hex(#E0FF6C)";
+    public static final String OLIVE = "%hex(#82A400)";
+    public static final String LIGHT_OLIVE = "%hex(#A0CA00)";
+    public static final String GREEN = "%hex(#46FF00)";
+    public static final String LEGACY_GREEN = "&2";
+    public static final String LIGHT_GREEN = "%hex(#95FF6E)";
+    public static final String DARK_GREEN = "%hex(#2B9F00)";
+    public static final String MARINE = "%hex(#00FF97)";
+    public static final String LEGACY_CYAN = "&3";
+    public static final String LIGHT_MARINE = "%hex(#6FFFC4)";
+    public static final String DARK_MARINE = "%hex(#00AF67)";
+    public static final String AQUA = "%hex(#00FFE8)";
+    public static final String LIGHT_AQUA = "%hex(#76FFF3)";
+    public static final String DARK_AQUA = "%hex(#00BCAC)";
+    public static final String BLUE = "%hex(#00B9FF)";
+    public static final String LEGACY_BLUE = "&9";
+    public static final String LIGHT_BLUE = "%hex(#6ED7FF)";
+    public static final String DARK_BLUE = "%hex(#0074A0)";
+    public static final String LEGACY_DARK_BLUE = "&1";
+    public static final String INDIGO = "%hex(#002EFF)";
+    public static final String LIGHT_INDIGO = "%hex(#7790FF)";
+    public static final String DARK_INDIGO = "%hex(#00146C)";
+    public static final String WHITE = "&f";
+    public static final String LIGHT_GRAY = "%hex(#CBCBCB)";
+    public static final String LEGACY_LIGHT_GRAY = "&7)";
+    public static final String GRAY = "%hex(#979797)";
+    public static final String LEGACY_GRAY = "&8";
+    public static final String BLACK = "&0";
+
+
     public static final Map<String, String> CACHED_FORMATIING = new HashMap<>();
     public static final Pattern STRIP_COLOR = Pattern.compile("(i?)§([0-9A-FK-ORa-fk-orXx])");
     public static final Pattern STRIP_HEX = Pattern.compile("(i?)&[xX]((&[0-9A-FK-ORa-fk-orXx]){6})");

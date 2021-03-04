@@ -12,6 +12,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import static me.marcusslover.sloversurvivalreborn.utils.ColorUtil.LIGHT_GRAY;
+
 @Command(name = "bank")
 @Menu(name = "Bank Menu")
 public class BankCommand implements PlayerCommand, IMenu {
@@ -26,10 +28,10 @@ public class BankCommand implements PlayerCommand, IMenu {
                 .withName("%hex(edbe13)Bank Menu")
                 .withAmount(1)
                 .withLore(
-                        "%hex(13baed)Through the Bank menu you can do things such as:",
-                        "%hex(13baed)- Transfer doubloons from and to accounts",
-                        "%hex(13baed)- Convert diamonds to doubloons",
-                        "%hex(13baed)- View how much tax you have to pay"
+                        LIGHT_GRAY +"Through the Bank menu you can do things such as:",
+                        LIGHT_GRAY +"- Transfer doubloons from and to accounts",
+                        LIGHT_GRAY +"- Convert diamonds to doubloons",
+                        LIGHT_GRAY +"- View how much tax you have to pay"
                 )
                 .build();
 
@@ -44,10 +46,10 @@ public class BankCommand implements PlayerCommand, IMenu {
                 .withName("%hex(3049b0)Manage Accounts")
                 .withAmount(1)
                 .withLore(
-                        "%hex(13baed)- Create joint accounts with others",
-                        "%hex(13baed)- Transfer doubloons between accounts",
-                        "%hex(13baed)- Convert diamonds to doubloons and vice versa.",
-                        "%hex(13baed)- View taxes."
+                        LIGHT_GRAY +"- Create joint accounts with others",
+                        LIGHT_GRAY +"- Transfer doubloons between accounts",
+                        LIGHT_GRAY +"- Convert diamonds to doubloons and vice versa.",
+                        LIGHT_GRAY +"- View taxes."
                 )
                 .build();
 
@@ -56,8 +58,8 @@ public class BankCommand implements PlayerCommand, IMenu {
                 .withName("%hex(f5b802)Statistics")
                 .withAmount(1)
                 .withLore(
-                        "%hex(13baed)- View top player balances",
-                        "%hex(13baed)- View taxes paid over time"
+                        LIGHT_GRAY +"- View top player balances",
+                        LIGHT_GRAY +"- View taxes paid over time"
                 )
                 .build();
     }
