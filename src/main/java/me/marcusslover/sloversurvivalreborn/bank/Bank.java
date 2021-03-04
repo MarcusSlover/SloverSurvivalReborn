@@ -124,7 +124,9 @@ public class Bank implements ICodeInitializer {
             diamondCount = bankData.get("diamondCount").getAsLong();
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
-        bankUpdateRunnable = new BankUpdateRunnable(bankData.get("timer").getAsLong());
+        bankUpdateRunnable = new BankUpdateRunnable(0);
+        if (bankData.has("timer"))
+            BankUpdateRunnable.timer = bankData.get("timer").getAsLong();
         updateRunnableTask = scheduler.scheduleSyncRepeatingTask(SloverSurvivalReborn.getInstance(), bankUpdateRunnable, 0, 20);
     }
 
