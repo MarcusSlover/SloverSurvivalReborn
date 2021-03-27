@@ -1,12 +1,15 @@
 # SloverSurvivalReborn
-It's an open-source project for a Minecarft plugin which improves your survival experience.
+It is an open-source project for a Minecraft plugin that improves your survival experience.
 This plugin aims to bring lots of custom features that will make you enjoy the game even more.
 It was designed to be used for SMP servers. 
-Note: If you want to play it by yourself, that's an option too!
-However, remember that this is still a plugin. You'll need to own a server or run it locally.
+
+Note: If you want to play it by yourself, that works too!
+However, remember this is a plugin. You will need to own a server or run it locally.
 
 ## Major Features
-What's awesome about these features? Well, it is another level of having fun.
+What are the features? Well, here is the list of them.
+Some of them may not be listed here as they most likely are related to the already displayed ones.
+
 - Economy
 - Custom Commands
 - Custom Items
