@@ -1,4 +1,4 @@
-# SloverSurvivalReborn
+# ✨ SloverSurvivalReborn
 It is an open-source project for a Minecraft plugin that improves your survival experience.
 This plugin aims to bring lots of custom features that will make you enjoy the game even more.
 It was designed to be used for SMP servers. 
